@@ -29,7 +29,7 @@ namespace ProductManagementSystem.EntityLayer.Concrete
 
         [Required]
         public DateTime PaymentDate { get; set; }
-        virtual public Invoice Invoice { get; set; }
-        virtual public Customer Customer { get; set; }
+        public virtual Invoice Invoice { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

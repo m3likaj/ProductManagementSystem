@@ -13,7 +13,7 @@ namespace ProductManagementSystem.DataAccessLayer.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202502121330087_mig1"; }
+            get { return "202502200854514_mig1"; }
         }
         
         string IMigrationMetadata.Source

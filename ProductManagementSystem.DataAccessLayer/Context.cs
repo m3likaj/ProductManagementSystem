@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using ProductManagementSystem.EntityLayer.Concrete;
 
 namespace ProductManagementSystem.DataAccessLayer
 {
-    public class Context: DbContext
+    public class Context : DbContext
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -17,5 +12,6 @@ namespace ProductManagementSystem.DataAccessLayer
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
     }
 }

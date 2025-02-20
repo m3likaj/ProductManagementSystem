@@ -26,13 +26,14 @@ namespace ProductManagementSystem.EntityLayer.Concrete
         [Required]
         public string Description { get; set; } //nvarchar 300
 
-        [Required]
-        public int CategoryId { get; set; }
+        
         public int? BrandId { get; set; } // nullable
-        virtual public Category Category { get; set; }
-        virtual public Brand Brand { get; set; }
 
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public decimal? TaxRate { get; set; }//nullable
+        public virtual Brand Brand { get; set; }
+
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
     }
 }

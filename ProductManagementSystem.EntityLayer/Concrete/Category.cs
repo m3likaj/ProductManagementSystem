@@ -15,5 +15,6 @@ namespace ProductManagementSystem.EntityLayer.Concrete
         [Required]
         [StringLength(50)]
         public string CategoryName { get; set; }
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

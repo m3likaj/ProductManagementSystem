@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProductManagementSystem.EntityLayer</RootNamespace>
     <AssemblyName>ProductManagementSystem.EntityLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <Compile Include="Concrete\Customer.cs" />
     <Compile Include="Concrete\Invoice.cs" />
     <Compile Include="Concrete\Order.cs" />
+    <Compile Include="Concrete\OrderProduct.cs" />
     <Compile Include="Concrete\Payment.cs" />
     <Compile Include="Concrete\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

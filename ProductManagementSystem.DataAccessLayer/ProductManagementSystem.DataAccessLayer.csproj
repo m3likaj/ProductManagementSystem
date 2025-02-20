@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProductManagementSystem.DataAccessLayer</RootNamespace>
     <AssemblyName>ProductManagementSystem.DataAccessLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,26 +53,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
-    <Compile Include="Migrations\202502121330087_mig1.cs" />
-    <Compile Include="Migrations\202502121330087_mig1.Designer.cs">
-      <DependentUpon>202502121330087_mig1.cs</DependentUpon>
+    <Compile Include="DAL\CategoryDal.cs" />
+    <Compile Include="DAL\CustomerDal.cs" />
+    <Compile Include="DAL\OrderDal.cs" />
+    <Compile Include="DAL\ProductDal.cs" />
+    <Compile Include="GenericFunctions.cs" />
+    <Compile Include="Migrations\202502200854514_mig1.cs" />
+    <Compile Include="Migrations\202502200854514_mig1.Designer.cs">
+      <DependentUpon>202502200854514_mig1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502200938100_mig11.cs" />
+    <Compile Include="Migrations\202502200938100_mig11.Designer.cs">
+      <DependentUpon>202502200938100_mig11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502200938524_mig2.cs" />
+    <Compile Include="Migrations\202502200938524_mig2.Designer.cs">
+      <DependentUpon>202502200938524_mig2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProductManagementSystem.EntityLayer\ProductManagementSystem.EntityLayer.csproj">
-      <Project>{8bde025d-8478-485a-85fc-086f88515d1e}</Project>
-      <Name>ProductManagementSystem.EntityLayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202502121330087_mig1.resx">
-      <DependentUpon>202502121330087_mig1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202502200854514_mig1.resx">
+      <DependentUpon>202502200854514_mig1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502200938100_mig11.resx">
+      <DependentUpon>202502200938100_mig11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502200938524_mig2.resx">
+      <DependentUpon>202502200938524_mig2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
