@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.DataAccessLayer.DAL;
 using ProductManagementSystem.DataAccessLayer.EntityFramework;
 using ProductManagementSystem.EntityLayer.Concrete;
@@ -11,8 +12,12 @@ namespace ProductManagementSystem.BusinessLayer
 {
     public class CategoryManager
     {
+        CategoryDal categoryDal;
+        public CategoryManager(Context context) {
+            categoryDal = new CategoryDal(context);
+        }
 
-        CategoryDal categoryDal = new CategoryDal();
+       
         public List<Category> GetAll()
         {
             return categoryDal.GetAll();

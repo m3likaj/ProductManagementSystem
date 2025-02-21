@@ -255,7 +255,6 @@
             // 
             this.txtID.BackColor = System.Drawing.Color.White;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtID.ForeColor = System.Drawing.Color.Black;
             this.txtID.Location = new System.Drawing.Point(152, 27);

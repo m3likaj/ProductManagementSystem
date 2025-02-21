@@ -20,7 +20,7 @@ namespace ProductManagementSystem.PresentationLayer
         public FrmProduct()
         {
             productManager = new ProductManager();
-            categoryManager = new CategoryManager();
+            categoryManager = new CategoryManager(productManager.GetContext());
 
             InitializeComponent();
         }
@@ -36,8 +36,15 @@ namespace ProductManagementSystem.PresentationLayer
                 Stock = int.Parse(txtStock.Text),
                 Description = txtDescription.Text,
             };
-            Category category = categoryManager.GetByName(cmbCategory.SelectedItem.ToString());
-            product.Categories.Add(category);
+            Category category = cmbCategory.SelectedItem as Category;
+            Category selectedCategory = new Category()
+            {
+                CategoryID = category.CategoryID,
+                CategoryName = category.CategoryName,
+            };
+            if (category == null) { MessageBox.Show("didnt add category"); }
+      
+            product.Categories.Add(selectedCategory);
             try
             {
                 productManager.Add(product);
@@ -46,7 +53,7 @@ namespace ProductManagementSystem.PresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please fill all areas correctly");
+                MessageBox.Show(ex.ToString());
                 productManager.ResetContext();
      
             }
@@ -78,15 +85,22 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            Product product = new Product()
+           Product product = new Product()
             {
-                ProductId = int.Parse(txtID.Text),
                 Name = txtName.Text,
                 Price = decimal.Parse(txtPrice.Text),
                 Stock = int.Parse(txtStock.Text),
                 Description = txtDescription.Text,
-                BrandId = int.Parse(txtBrand.Text),
             };
+            Category category = cmbCategory.SelectedItem as Category;
+            Category selectedCategory = new Category()
+            {
+                CategoryID = category.CategoryID,
+                CategoryName = category.CategoryName,
+            };
+            if (category == null) { MessageBox.Show("didnt add category"); }
+      
+            product.Categories.Add(selectedCategory);
 
 
             try
@@ -334,10 +348,20 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void updateCategoryCombo()
         {
+         
             var values = categoryManager.GetAll();
-            cmbCategory.DataSource = values;
+            var categoryList = new List<Category>
+                                {
+                                    new Category { CategoryID = 0, CategoryName = "-- Select a category --" } 
+                                };
+
+            categoryList.AddRange(values);
+
+            cmbCategory.DataSource = categoryList;
             cmbCategory.DisplayMember = "CategoryName";
-            cmbCategory.ValueMember = "CategoryId";
+            cmbCategory.ValueMember = "CategoryID";
+            cmbCategory.SelectedIndex = 0; 
+
         }
     }
 }

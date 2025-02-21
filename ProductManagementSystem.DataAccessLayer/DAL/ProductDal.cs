@@ -13,7 +13,7 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 {
     public class ProductDal : GenericFunctions<Product>
     {
-        Context context;
+        public Context context;
         public ProductDal()
         {
             context = new Context();
@@ -55,19 +55,18 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
         public List<object> GetProductsWithCategory()
         {
             var values = context.Products
-                    .Include(x => x.Categories)
-                     .Select(x => new
-                     {
-                         ProductID = x.ProductId,
-                         Name = x.Name,
-                         Price = x.Price,
-                         Stock = x.Stock,
-                         Category = x.Categories
-                             .Select(c => c.CategoryName)
-                             .DefaultIfEmpty() // Handles products with no categories
-                             .Aggregate((a, b) => a + ", " + b)
-                     })
-                     .ToList();
+                                .Include(x => x.Categories) // Ensures categories are loaded
+                                .ToList() // Brings data into memory, allowing string operations
+                                .Select(x => new
+                                {
+                                    ProductID = x.ProductId,
+                                    Name = x.Name,
+                                    Price = x.Price,
+                                    Stock = x.Stock,
+                                    Category = getCategories(x.Categories) // Works in memory
+                                })
+                                .ToList();
+
 
 
             return values.Cast<object>().ToList();

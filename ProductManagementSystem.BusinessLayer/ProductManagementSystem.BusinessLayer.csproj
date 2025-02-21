@@ -47,5 +47,15 @@
     <Compile Include="ProductManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProductManagementSystem.DataAccessLayer\ProductManagementSystem.DataAccessLayer.csproj">
+      <Project>{c3b6bb4e-937f-4214-96b1-1b3e155d0eba}</Project>
+      <Name>ProductManagementSystem.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductManagementSystem.EntityLayer\ProductManagementSystem.EntityLayer.csproj">
+      <Project>{8bde025d-8478-485a-85fc-086f88515d1e}</Project>
+      <Name>ProductManagementSystem.EntityLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.DataAccessLayer.EntityFramework;
 using ProductManagementSystem.EntityLayer.Concrete;
 
@@ -54,6 +55,9 @@ namespace ProductManagementSystem.BusinessLayer
         public void ResetContext()
         {
             productDal.ResetContext();
+        }
+        public Context GetContext() { 
+            return productDal.context;
         }
     }
 }
