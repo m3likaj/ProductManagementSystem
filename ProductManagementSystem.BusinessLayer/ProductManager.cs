@@ -40,11 +40,11 @@ namespace ProductManagementSystem.BusinessLayer
         }
 
 
-        public List<Product> GetProductsByName(string name)
+        public List<object> GetProductsByName(string name)
         {
             return productDal.GetProductByName(name);
         }
-        public List<Product> GetProductsByCategory(string category)
+        public List<object> GetProductsByCategory(string category)
         {
             return productDal.GetProductsByCategory(category);
         }

@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using ProductManagementSystem.EntityLayer.Concrete;
 
 namespace ProductManagementSystem.DataAccessLayer.EntityFramework
@@ -32,20 +33,42 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
             }).ToList();
             return values.Cast<IEnumerable<object>>().ToList();
         }
-        public List<Product> GetProductsByCategory(string category)
-        {
-            return context.Products
-                .Where(p => p.Categories.Any(c => c.CategoryName == category))
-                .ToList();
-        }
-
-        public List<Product> GetProductByName(string name)
+        public List<object> GetProductsByCategory(string category)
         {
             var values = context.Products
-                .Where(x => x.Name == name)
-                .ToList();
+                                .Where(p => p.Categories.Any(c => c.CategoryName == category))
+                                .Include(x => x.Categories) // Ensures categories are loaded
+                                .ToList() // Brings data into memory, allowing string operations
+                                .Select(x => new
+                                {
+                                    ProductID = x.ProductId,
+                                    Name = x.Name,
+                                    Price = x.Price,
+                                    Stock = x.Stock,
+                                    Category = getCategories(x.Categories) // Works in memory
+                                })
+                                .ToList();
+            return values.Cast<object>().ToList();
+        }
 
-            return values.Cast<Product>().ToList();
+        public List<object> GetProductByName(string name)
+        {
+            var values = context.Products
+                                .Where(x => x.Name == name)
+                                .Include(x => x.Categories) // Ensures categories are loaded
+                                .ToList() // Brings data into memory, allowing string operations
+                                .Select(x => new
+                                {
+                                    ProductID = x.ProductId,
+                                    Name = x.Name,
+                                    Price = x.Price,
+                                    Stock = x.Stock,
+                                    Category = getCategories(x.Categories) // Works in memory
+                                })
+                                .ToList();
+            
+
+            return values.Cast<object>().ToList();
         }
         public void ResetContext()
         {

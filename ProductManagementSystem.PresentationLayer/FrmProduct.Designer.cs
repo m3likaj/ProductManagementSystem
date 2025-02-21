@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnShowMenu = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -72,6 +72,7 @@
             this.btnFetchMenu = new System.Windows.Forms.Button();
             this.btnDeleteMenu = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlHeader.SuspendLayout();
             this.pnlIdProcess.SuspendLayout();
             this.pnlDetails.SuspendLayout();
@@ -85,7 +86,7 @@
             this.pnlHeader.BackColor = System.Drawing.Color.SteelBlue;
             this.pnlHeader.Controls.Add(this.btnShowMenu);
             this.pnlHeader.Controls.Add(this.label6);
-            this.pnlHeader.Location = new System.Drawing.Point(12, 12);
+            this.pnlHeader.Location = new System.Drawing.Point(10, 12);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(984, 67);
             this.pnlHeader.TabIndex = 51;
@@ -100,7 +101,7 @@
             this.btnShowMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowMenu.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnShowMenu.ForeColor = System.Drawing.Color.White;
-            this.btnShowMenu.Location = new System.Drawing.Point(-11, 0);
+            this.btnShowMenu.Location = new System.Drawing.Point(0, 0);
             this.btnShowMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnShowMenu.Name = "btnShowMenu";
             this.btnShowMenu.Size = new System.Drawing.Size(177, 67);
@@ -196,6 +197,7 @@
             // 
             // pnlDetails
             // 
+            this.pnlDetails.Controls.Add(this.flowLayoutPanel1);
             this.pnlDetails.Controls.Add(this.cmbCategory);
             this.pnlDetails.Controls.Add(this.label5);
             this.pnlDetails.Controls.Add(this.txtStock);
@@ -449,7 +451,7 @@
             this.pnlCategories.Controls.Add(this.label8);
             this.pnlCategories.Controls.Add(this.label9);
             this.pnlCategories.Controls.Add(this.txtCategoryName);
-            this.pnlCategories.Location = new System.Drawing.Point(211, 236);
+            this.pnlCategories.Location = new System.Drawing.Point(201, 277);
             this.pnlCategories.Name = "pnlCategories";
             this.pnlCategories.Size = new System.Drawing.Size(665, 392);
             this.pnlCategories.TabIndex = 42;
@@ -711,14 +713,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(222, 162);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
@@ -727,6 +729,13 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(750, 532);
             this.dataGridView1.TabIndex = 47;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(415, 117);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(332, 38);
+            this.flowLayoutPanel1.TabIndex = 40;
             // 
             // FrmProduct
             // 
@@ -801,5 +810,6 @@
         private System.Windows.Forms.Button btnDeleteCategory;
         private System.Windows.Forms.Button btnUpdateCategory;
         private System.Windows.Forms.Button btnListCategory;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

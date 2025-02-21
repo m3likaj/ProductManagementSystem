@@ -103,14 +103,24 @@ namespace ProductManagementSystem.PresentationLayer
             {
                 customer = customerManager.GetCustomerByEmail(txtSearch.Text);
             }
+            
+            
             if (customer == null)
             {
                 MessageBox.Show("Customer not found");
                 return;
             }
-            MessageBox.Show("Customer will be deleted permanenetly!");
-            customerManager.Delete(customer);
-            MessageBox.Show("Customer Deleted");
+            DialogResult result = MessageBox.Show("Customer will be deleted permanenetly!", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                customerManager.Delete(customer);
+                MessageBox.Show("Customer Deleted");
+            }
+            else
+            {
+                return;
+            }
         }
 
         private void ViewOrders_Click(object sender, EventArgs e)

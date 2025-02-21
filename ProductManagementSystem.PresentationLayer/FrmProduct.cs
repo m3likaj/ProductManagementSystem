@@ -16,11 +16,13 @@ namespace ProductManagementSystem.PresentationLayer
     {
         ProductManager productManager;
         CategoryManager categoryManager;
+        List<Category> SelectedCategories;
         
         public FrmProduct()
         {
             productManager = new ProductManager();
             categoryManager = new CategoryManager(productManager.GetContext());
+            SelectedCategories = new List<Category>();
 
             InitializeComponent();
         }
@@ -35,16 +37,11 @@ namespace ProductManagementSystem.PresentationLayer
                 Price = decimal.Parse(txtPrice.Text),
                 Stock = int.Parse(txtStock.Text),
                 Description = txtDescription.Text,
+                Categories = SelectedCategories,
             };
-            Category category = cmbCategory.SelectedItem as Category;
-            Category selectedCategory = new Category()
-            {
-                CategoryID = category.CategoryID,
-                CategoryName = category.CategoryName,
-            };
-            if (category == null) { MessageBox.Show("didnt add category"); }
-      
-            product.Categories.Add(selectedCategory);
+          
+           
+            
             try
             {
                 productManager.Add(product);
@@ -81,6 +78,7 @@ namespace ProductManagementSystem.PresentationLayer
             cmbCategory.Text = "";
             txtCategoryName.Text = "";
             txtCategoryID.Text = "";
+            txtSearch.Text = "";
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -93,14 +91,21 @@ namespace ProductManagementSystem.PresentationLayer
                 Description = txtDescription.Text,
             };
             Category category = cmbCategory.SelectedItem as Category;
-            Category selectedCategory = new Category()
+            if (category.CategoryID >= 1)
             {
-                CategoryID = category.CategoryID,
-                CategoryName = category.CategoryName,
-            };
-            if (category == null) { MessageBox.Show("didnt add category"); }
-      
-            product.Categories.Add(selectedCategory);
+                Category selectedCategory = new Category()
+                {
+                    CategoryID = category.CategoryID,
+                    CategoryName = category.CategoryName,
+                };
+
+                product.Categories.Add(selectedCategory);
+
+            }
+            else
+            {
+                MessageBox.Show("didnt add category");
+            }
 
 
             try
@@ -127,28 +132,24 @@ namespace ProductManagementSystem.PresentationLayer
             
             if (product == null)
             {
-                MessageBox.Show("Customer not found");
+                MessageBox.Show("product not found");
                 return;
             }
-            MessageBox.Show("Customer will be deleted permanenetly!");
-            productManager.Delete(product);
-            MessageBox.Show("Customer Deleted");
+            DialogResult result = MessageBox.Show("Product will be deleted permanenetly!", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                productManager.Delete(product);
+                MessageBox.Show("Product Deleted");
+            }
+            else
+            {
+                return;
+            }
+           
         }
 
-        private void ViewOrders_Click(object sender, EventArgs e)
-        {
-            Product product = null;
-            int.TryParse(txtSearch.Text, out int id);
-            product = productManager.Get(id);
-            
-            if (product == null)
-            {
-                MessageBox.Show("Customer not found");
-                return;
-            }
-            var values = productManager.GetOrderHistory(id);
-            dataGridView1.DataSource = values;
-        }
+        
 
         private void FrmProduct_Load(object sender, EventArgs e)
         {
@@ -167,7 +168,7 @@ namespace ProductManagementSystem.PresentationLayer
             
             if (product == null && !pnlDetails.Visible && !btnDelete.Visible)
             {
-                List<Product> products = productManager.GetProductsByName(txtSearch.Text);
+                var products = productManager.GetProductsByName(txtSearch.Text);
             
                 if (products.Count()==0)
                 {
@@ -175,7 +176,7 @@ namespace ProductManagementSystem.PresentationLayer
                 }
                 if (products.Count() == 0)
                 {
-                    MessageBox.Show("Customer not found");
+                    MessageBox.Show("Product not found");
                     return;
                 }
                 dataGridView1.DataSource = products;
@@ -211,13 +212,14 @@ namespace ProductManagementSystem.PresentationLayer
             txtID.Visible = false;
             lblID.Visible = false;
             pnlCategories.Visible = false;
+            SelectedCategories.Clear();
+            flowLayoutPanel1.Controls.Clear();
+            updateCategoryCombo();
         }
 
         private void btnUpdateMenu_Click(object sender, EventArgs e)
         {
             pnlIdProcess.Visible = true;
-
-            
             btnFetch.Visible = true;
             btnDelete.Visible = false;
             pnlDetails.Visible = true;
@@ -227,6 +229,9 @@ namespace ProductManagementSystem.PresentationLayer
             txtID.Visible = true;
             lblID.Visible = true;
             pnlCategories.Visible=false;
+            SelectedCategories.Clear();
+            flowLayoutPanel1.Controls.Clear();
+            updateCategoryCombo();
         }
 
         private void btnDeleteMenu_Click(object sender, EventArgs e)
@@ -240,6 +245,7 @@ namespace ProductManagementSystem.PresentationLayer
             btnAdd.Visible = false;
             btnUpdate.Visible = true;
             pnlCategories.Visible = false;
+           
         }
 
         private void btnFetchMenu_Click(object sender, EventArgs e)
@@ -253,11 +259,13 @@ namespace ProductManagementSystem.PresentationLayer
             btnAdd.Visible = false;
             btnUpdate.Visible = false;
             pnlCategories.Visible = false;
+           
         }
 
         private void btnShowMenu_Click(object sender, EventArgs e)
         {
             pnlMenu.Visible = !pnlMenu.Visible;
+           
         }
 
         private void btnCategoryMenu_Click(object sender, EventArgs e)
@@ -270,6 +278,8 @@ namespace ProductManagementSystem.PresentationLayer
             btnAdd.Visible = false;
             btnUpdate.Visible = false;
             pnlCategories.Visible = true;
+            SelectedCategories.Clear();
+            
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e)
@@ -343,7 +353,51 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Get the selected item's text
+            string selectedText = cmbCategory.Text;
+            Category category = cmbCategory.SelectedItem as Category;
 
+            // Check if a label with the same text already exists (avoid duplicates)
+            foreach (Label lbl in flowLayoutPanel1.Controls.OfType<Label>())
+            {
+                if (lbl.Text == selectedText) return; // Do nothing if the label already exists
+            }
+
+            
+            if (category.CategoryID > 0)
+            {
+                // Create a new label
+                Label newLabel = new Label
+                {
+                    Text = selectedText,
+                    AutoSize = true,
+                    Padding = new Padding(5), // Add some spacing
+                    BackColor = Color.LightGray, // Give it a distinct look
+                    Margin = new Padding(3), // Space between labels
+                    Cursor = Cursors.Hand // Change cursor to indicate clickability
+                };
+
+                Category selectedCategory = new Category()
+                {
+                    CategoryID = category.CategoryID,
+                    CategoryName = category.CategoryName,
+                };
+                SelectedCategories.Add(selectedCategory);
+
+
+                // Attach click event to remove the label and perform extra actions
+                newLabel.Click += (s, ev) =>
+                {
+                    // Confirm before removing
+
+                    flowLayoutPanel1.Controls.Remove(newLabel); // Remove from FlowLayoutPanel
+                    SelectedCategories.Remove(selectedCategory);
+
+                };
+
+                // Add label to FlowLayoutPanel
+                flowLayoutPanel1.Controls.Add(newLabel);
+            }
         }
 
         private void updateCategoryCombo()
