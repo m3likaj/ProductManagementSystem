@@ -31,28 +31,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnShowMenu = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.pnlDetails = new System.Windows.Forms.Panel();
-            this.txtID = new System.Windows.Forms.TextBox();
-            this.lblID = new System.Windows.Forms.Label();
-            this.txtSurName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pnlIdProcess = new System.Windows.Forms.Panel();
             this.btnFetch = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnOrdersHistory = new System.Windows.Forms.Button();
             this.btnHistoryMenu = new System.Windows.Forms.Button();
             this.btnAddMenu = new System.Windows.Forms.Button();
             this.btnUpdateMenu = new System.Windows.Forms.Button();
@@ -62,7 +45,8 @@
             this.btnVeiwAll = new System.Windows.Forms.Button();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.pnlDetails.SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.pnlIdProcess.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -99,225 +83,6 @@
             this.label6.TabIndex = 38;
             this.label6.Text = "Order Management Page";
             // 
-            // pnlDetails
-            // 
-            this.pnlDetails.Controls.Add(this.txtID);
-            this.pnlDetails.Controls.Add(this.lblID);
-            this.pnlDetails.Controls.Add(this.txtSurName);
-            this.pnlDetails.Controls.Add(this.label2);
-            this.pnlDetails.Controls.Add(this.btnClear);
-            this.pnlDetails.Controls.Add(this.btnAdd);
-            this.pnlDetails.Controls.Add(this.txtFirstName);
-            this.pnlDetails.Controls.Add(this.label1);
-            this.pnlDetails.Controls.Add(this.txtEmail);
-            this.pnlDetails.Controls.Add(this.label3);
-            this.pnlDetails.Controls.Add(this.label);
-            this.pnlDetails.Controls.Add(this.btnUpdate);
-            this.pnlDetails.Controls.Add(this.txtPhone);
-            this.pnlDetails.Controls.Add(this.label4);
-            this.pnlDetails.Controls.Add(this.txtAddress);
-            this.pnlDetails.Location = new System.Drawing.Point(222, 162);
-            this.pnlDetails.Name = "pnlDetails";
-            this.pnlDetails.Size = new System.Drawing.Size(494, 394);
-            this.pnlDetails.TabIndex = 45;
-            // 
-            // txtID
-            // 
-            this.txtID.BackColor = System.Drawing.Color.White;
-            this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Enabled = false;
-            this.txtID.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtID.ForeColor = System.Drawing.Color.Black;
-            this.txtID.Location = new System.Drawing.Point(152, 27);
-            this.txtID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(257, 30);
-            this.txtID.TabIndex = 31;
-            // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.BackColor = System.Drawing.Color.Transparent;
-            this.lblID.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblID.ForeColor = System.Drawing.Color.Black;
-            this.lblID.Location = new System.Drawing.Point(11, 27);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(120, 27);
-            this.lblID.TabIndex = 30;
-            this.lblID.Text = "Product ID :";
-            // 
-            // txtSurName
-            // 
-            this.txtSurName.BackColor = System.Drawing.Color.White;
-            this.txtSurName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSurName.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSurName.ForeColor = System.Drawing.Color.Black;
-            this.txtSurName.Location = new System.Drawing.Point(152, 119);
-            this.txtSurName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtSurName.Name = "txtSurName";
-            this.txtSurName.Size = new System.Drawing.Size(257, 30);
-            this.txtSurName.TabIndex = 34;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(25, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 27);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "First Name :";
-            // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.FlatAppearance.BorderSize = 0;
-            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(74, 336);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(119, 53);
-            this.btnClear.TabIndex = 36;
-            this.btnClear.Text = "Clear Form";
-            this.btnClear.UseVisualStyleBackColor = false;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(229, 336);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(130, 53);
-            this.btnAdd.TabIndex = 29;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = false;
-            // 
-            // txtFirstName
-            // 
-            this.txtFirstName.BackColor = System.Drawing.Color.White;
-            this.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFirstName.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFirstName.ForeColor = System.Drawing.Color.Black;
-            this.txtFirstName.Location = new System.Drawing.Point(152, 76);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(257, 30);
-            this.txtFirstName.TabIndex = 18;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(69, 171);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 27);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Email :";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.BackColor = System.Drawing.Color.White;
-            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEmail.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(152, 171);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(257, 31);
-            this.txtEmail.TabIndex = 20;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(62, 225);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 27);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Phone :";
-            // 
-            // label
-            // 
-            this.label.AutoSize = true;
-            this.label.BackColor = System.Drawing.Color.Transparent;
-            this.label.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label.ForeColor = System.Drawing.Color.Black;
-            this.label.Location = new System.Drawing.Point(31, 124);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(111, 27);
-            this.label.TabIndex = 33;
-            this.label.Text = "Sur Name :";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(229, 336);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(110, 52);
-            this.btnUpdate.TabIndex = 27;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.BackColor = System.Drawing.Color.White;
-            this.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPhone.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone.Location = new System.Drawing.Point(152, 221);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtPhone.MaxLength = 10;
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(257, 30);
-            this.txtPhone.TabIndex = 22;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(46, 282);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 27);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Address :";
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.BackColor = System.Drawing.Color.White;
-            this.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAddress.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(152, 281);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(257, 30);
-            this.txtAddress.TabIndex = 24;
-            // 
             // txtSearch
             // 
             this.txtSearch.BackColor = System.Drawing.Color.White;
@@ -348,7 +113,6 @@
             this.pnlIdProcess.Controls.Add(this.label7);
             this.pnlIdProcess.Controls.Add(this.btnFetch);
             this.pnlIdProcess.Controls.Add(this.btnDelete);
-            this.pnlIdProcess.Controls.Add(this.btnOrdersHistory);
             this.pnlIdProcess.Location = new System.Drawing.Point(211, 89);
             this.pnlIdProcess.Name = "pnlIdProcess";
             this.pnlIdProcess.Size = new System.Drawing.Size(785, 67);
@@ -371,6 +135,7 @@
             this.btnFetch.TabIndex = 37;
             this.btnFetch.Text = "Fetch";
             this.btnFetch.UseVisualStyleBackColor = false;
+            this.btnFetch.Click += new System.EventHandler(this.btnFetch_Click);
             // 
             // btnDelete
             // 
@@ -390,24 +155,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             // 
-            // btnOrdersHistory
-            // 
-            this.btnOrdersHistory.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnOrdersHistory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrdersHistory.FlatAppearance.BorderSize = 0;
-            this.btnOrdersHistory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnOrdersHistory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnOrdersHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrdersHistory.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnOrdersHistory.ForeColor = System.Drawing.Color.White;
-            this.btnOrdersHistory.Location = new System.Drawing.Point(556, 12);
-            this.btnOrdersHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnOrdersHistory.Name = "btnOrdersHistory";
-            this.btnOrdersHistory.Size = new System.Drawing.Size(181, 52);
-            this.btnOrdersHistory.TabIndex = 35;
-            this.btnOrdersHistory.Text = "View Order History";
-            this.btnOrdersHistory.UseVisualStyleBackColor = false;
-            // 
             // btnHistoryMenu
             // 
             this.btnHistoryMenu.BackColor = System.Drawing.Color.SteelBlue;
@@ -425,6 +172,7 @@
             this.btnHistoryMenu.TabIndex = 45;
             this.btnHistoryMenu.Text = "View Order History";
             this.btnHistoryMenu.UseVisualStyleBackColor = false;
+            this.btnHistoryMenu.Click += new System.EventHandler(this.btnHistoryMenu_Click);
             // 
             // btnAddMenu
             // 
@@ -441,7 +189,7 @@
             this.btnAddMenu.Name = "btnAddMenu";
             this.btnAddMenu.Size = new System.Drawing.Size(191, 98);
             this.btnAddMenu.TabIndex = 44;
-            this.btnAddMenu.Text = "Add";
+            this.btnAddMenu.Text = "All Orders";
             this.btnAddMenu.UseVisualStyleBackColor = false;
             // 
             // btnUpdateMenu
@@ -472,7 +220,7 @@
             this.btnFetchMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFetchMenu.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnFetchMenu.ForeColor = System.Drawing.Color.White;
-            this.btnFetchMenu.Location = new System.Drawing.Point(-14, 401);
+            this.btnFetchMenu.Location = new System.Drawing.Point(-11, 401);
             this.btnFetchMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFetchMenu.Name = "btnFetchMenu";
             this.btnFetchMenu.Size = new System.Drawing.Size(191, 98);
@@ -529,6 +277,7 @@
             this.btnVeiwAll.TabIndex = 26;
             this.btnVeiwAll.Text = "All Products";
             this.btnVeiwAll.UseVisualStyleBackColor = false;
+            this.btnVeiwAll.Click += new System.EventHandler(this.btnVeiwAll_Click);
             // 
             // pnlHeader
             // 
@@ -553,29 +302,64 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(222, 162);
+            this.dataGridView1.Location = new System.Drawing.Point(211, 163);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(750, 532);
+            this.dataGridView1.Size = new System.Drawing.Size(785, 478);
             this.dataGridView1.TabIndex = 42;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(829, 649);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(146, 54);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Make Order";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.SteelBlue;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(829, 649);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(146, 54);
+            this.button2.TabIndex = 47;
+            this.button2.Text = "Confirm";
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // FrmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 706);
-            this.Controls.Add(this.pnlDetails);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlIdProcess);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.dataGridView1);
             this.Name = "FrmOrder";
             this.Text = "FrmOrder";
-            this.pnlDetails.ResumeLayout(false);
-            this.pnlDetails.PerformLayout();
             this.pnlIdProcess.ResumeLayout(false);
             this.pnlIdProcess.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
@@ -590,28 +374,11 @@
 
         private System.Windows.Forms.Button btnShowMenu;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel pnlDetails;
-        private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.TextBox txtSurName;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox txtFirstName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.TextBox txtPhone;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel pnlIdProcess;
         private System.Windows.Forms.Button btnFetch;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnOrdersHistory;
         private System.Windows.Forms.Button btnHistoryMenu;
         private System.Windows.Forms.Button btnAddMenu;
         private System.Windows.Forms.Button btnUpdateMenu;
@@ -621,5 +388,7 @@
         private System.Windows.Forms.Button btnVeiwAll;
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
