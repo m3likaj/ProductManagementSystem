@@ -24,7 +24,6 @@ namespace ProductManagementSystem.BusinessLayer
         }
         public void Add(Category entity)
         {
-
             categoryDal.Add(entity);
         }
         public void Update(Category entity)
@@ -41,13 +40,18 @@ namespace ProductManagementSystem.BusinessLayer
             return categoryDal.Get(id);
         }
         
-        public void ResetContext()
+        /*public void ResetContext()
         {
             categoryDal.ResetContext();
-        }
+        }*/
         public Category GetByName(string name)
         {
             return categoryDal.GetByName(name);
         }
+
+        public Context GetContext()
+        {
+            return categoryDal._context;
+        }   
     }
 }

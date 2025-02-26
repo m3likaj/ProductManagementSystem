@@ -10,7 +10,7 @@ namespace ProductManagementSystem.DataAccessLayer.DAL
 {
     public class CategoryDal: GenericFunctions<Category>
     {
-        Context _context;
+        public Context _context;
         public CategoryDal(Context context)
         {
             this._context = context;
@@ -19,11 +19,11 @@ namespace ProductManagementSystem.DataAccessLayer.DAL
         {
             return _context.Categories.Where(c=>c.CategoryName==name).FirstOrDefault();
         }
-        public void ResetContext()
+       /* public void ResetContext()
         {
             _context.Dispose();
             _context = new Context();
-        }
+        }*/
 
     }
 }

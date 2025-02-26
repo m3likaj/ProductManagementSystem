@@ -14,15 +14,15 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 {
     public class ProductDal : GenericFunctions<Product>
     {
-        public Context context;
-        public ProductDal()
+        public Context _context;
+        public ProductDal(Context context)
         {
-            context = new Context();
+            _context = context;
         }
 
         public List<IEnumerable<object>> GetOrderHistory(int id)
         {
-            var values = context.Invoices.Where(inv => inv.CustomerID == id).Select(i => new
+            var values = _context.Invoices.Where(inv => inv.CustomerID == id).Select(i => new
             {
                 order = i.Orders.Select(o => new
                 {
@@ -35,7 +35,7 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
         }
         public List<object> GetProductsByCategory(string category)
         {
-            var values = context.Products
+            var values = _context.Products
                                 .Where(p => p.Categories.Any(c => c.CategoryName == category))
                                 .Include(x => x.Categories) // Ensures categories are loaded
                                 .ToList() // Brings data into memory, allowing string operations
@@ -53,7 +53,7 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 
         public List<object> GetProductByName(string name)
         {
-            var values = context.Products
+            var values = _context.Products
                                 .Where(x => x.Name == name)
                                 .Include(x => x.Categories) // Ensures categories are loaded
                                 .ToList() // Brings data into memory, allowing string operations
@@ -70,14 +70,15 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 
             return values.Cast<object>().ToList();
         }
-        public void ResetContext()
+       /* public void ResetContext()
         {
-            context.Dispose();
-            context = new Context();
-        }
+            _context.Dispose();
+            _context = new Context();
+        }*/
+
         public List<object> GetProductsWithCategory()
         {
-            var values = context.Products
+            var values = _context.Products
                                 .Include(x => x.Categories) // Ensures categories are loaded
                                 .ToList() // Brings data into memory, allowing string operations
                                 .Select(x => new
@@ -101,9 +102,37 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
             string Categories = "";
             foreach (Category item in categories)
             {
-                Categories += item.CategoryName + " ";
+                Categories += item.CategoryName + ", ";
             }
             return Categories;
+        }
+
+        public void AddCategoryToProduct(List<int> SelectedCategories, Product product)
+        {
+            // Ensure that the product is being tracked by the same context
+            var trackedProduct = _context.Products
+                                         .Include(p => p.Categories)
+                                         .FirstOrDefault(p => p.ProductId == product.ProductId);
+
+            if (trackedProduct != null)
+            {
+                // Fetch the categories from the same context
+                var categories = _context.Categories
+                                         .Where(c => SelectedCategories.Contains(c.CategoryID))
+                                         .ToList();
+
+                // Add categories to the tracked product
+                foreach (var category in categories)
+                {
+                    if (!trackedProduct.Categories.Contains(category))
+                    {
+                        trackedProduct.Categories.Add(category);
+                    }
+                }
+
+                // Save changes to the context
+                _context.SaveChanges();
+            }
         }
     }
 }

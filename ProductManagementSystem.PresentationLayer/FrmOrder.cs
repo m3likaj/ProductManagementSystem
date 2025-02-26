@@ -8,16 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProductManagementSystem.BusinessLayer;
+using ProductManagementSystem.DataAccessLayer;
 
 namespace ProductManagementSystem.PresentationLayer
 {
     public partial class FrmOrder : Form
     {
         ProductManager productManager;
-      
+        Context context;
         public FrmOrder()
         {
-            productManager = new ProductManager();
+            context = new Context();
+            productManager = new ProductManager(context);
             InitializeComponent();
         }
 

@@ -11,7 +11,12 @@ namespace ProductManagementSystem.BusinessLayer
 {
     public class ProductManager
     {
-        ProductDal productDal = new ProductDal();
+        ProductDal productDal;
+        public ProductManager(Context context)
+        {
+            productDal= new ProductDal(context);
+        }
+        
         public List<Product> GetAll()
         {
             return productDal.GetAll();
@@ -52,12 +57,16 @@ namespace ProductManagementSystem.BusinessLayer
         {
             return productDal.GetProductsWithCategory();
         }
-        public void ResetContext()
+        /*public void ResetContext()
         {
             productDal.ResetContext();
-        }
+        }*/
         public Context GetContext() { 
-            return productDal.context;
+            return productDal._context;
+        }
+        public void AddCategoryToProduct(List<int> SelectedCategories, Product product)
+        {
+            productDal.AddCategoryToProduct(SelectedCategories, product);
         }
     }
 }

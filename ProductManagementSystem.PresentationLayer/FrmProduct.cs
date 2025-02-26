@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProductManagementSystem.BusinessLayer;
+using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.EntityLayer.Concrete;
 
 namespace ProductManagementSystem.PresentationLayer
 {
     public partial class FrmProduct : Form
     {
+        Context context;
         ProductManager productManager;
         CategoryManager categoryManager;
-        List<Category> SelectedCategories;
+        List<int> SelectedCategories;
         
         public FrmProduct()
         {
-            productManager = new ProductManager();
-            categoryManager = new CategoryManager(productManager.GetContext());
-            SelectedCategories = new List<Category>();
+            context = new Context();
+            productManager = new ProductManager(context);
+            categoryManager = new CategoryManager(context);
+            SelectedCategories = new List<int>();
 
             InitializeComponent();
         }
@@ -31,19 +35,21 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            
             Product product = new Product()
             {
                 Name = txtName.Text,
                 Price = decimal.Parse(txtPrice.Text),
                 Stock = int.Parse(txtStock.Text),
                 Description = txtDescription.Text,
-                Categories = SelectedCategories,
             };
-          
-           
-            
+
+            productManager.AddCategoryToProduct(SelectedCategories, product);
+
+
             try
             {
+
                 productManager.Add(product);
                 MessageBox.Show("Product added");
                 btnClear_Click(sender, e);
@@ -51,7 +57,7 @@ namespace ProductManagementSystem.PresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                productManager.ResetContext();
+                //productManager.ResetContext();
      
             }
         }
@@ -83,29 +89,18 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-           Product product = new Product()
+            var categories = productManager.GetContext().Categories
+                     .Where(c => SelectedCategories.Contains(c.CategoryID))
+                     .ToList();
+
+            Product product = new Product()
             {
                 Name = txtName.Text,
                 Price = decimal.Parse(txtPrice.Text),
                 Stock = int.Parse(txtStock.Text),
                 Description = txtDescription.Text,
+                Categories = categories,
             };
-            Category category = cmbCategory.SelectedItem as Category;
-            if (category.CategoryID >= 1)
-            {
-                Category selectedCategory = new Category()
-                {
-                    CategoryID = category.CategoryID,
-                    CategoryName = category.CategoryName,
-                };
-
-                product.Categories.Add(selectedCategory);
-
-            }
-            else
-            {
-                MessageBox.Show("didnt add category");
-            }
 
 
             try
@@ -117,7 +112,7 @@ namespace ProductManagementSystem.PresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show("Please fill all areas correctly");
-                productManager.ResetContext();
+               // productManager.ResetContext();
                
             }
 
@@ -298,7 +293,7 @@ namespace ProductManagementSystem.PresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show("Please fill all areas correctly"); 
-                categoryManager.ResetContext();
+               // categoryManager.ResetContext();
                 
             }
         }
@@ -323,7 +318,7 @@ namespace ProductManagementSystem.PresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show("Please fill all areas correctly");
-                categoryManager.ResetContext();
+               // categoryManager.ResetContext();
 
             }
         }
@@ -377,12 +372,11 @@ namespace ProductManagementSystem.PresentationLayer
                     Cursor = Cursors.Hand // Change cursor to indicate clickability
                 };
 
-                Category selectedCategory = new Category()
+                if (category.CategoryID > 0)
                 {
-                    CategoryID = category.CategoryID,
-                    CategoryName = category.CategoryName,
-                };
-                SelectedCategories.Add(selectedCategory);
+                    SelectedCategories.Add(category.CategoryID);
+                }
+
 
 
                 // Attach click event to remove the label and perform extra actions
@@ -391,7 +385,7 @@ namespace ProductManagementSystem.PresentationLayer
                     // Confirm before removing
 
                     flowLayoutPanel1.Controls.Remove(newLabel); // Remove from FlowLayoutPanel
-                    SelectedCategories.Remove(selectedCategory);
+                    SelectedCategories.Remove(category.CategoryID);
 
                 };
 
