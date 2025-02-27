@@ -40,10 +40,10 @@ namespace ProductManagementSystem.BusinessLayer
             return categoryDal.Get(id);
         }
         
-        /*public void ResetContext()
+        public void ResetContext()
         {
             categoryDal.ResetContext();
-        }*/
+        }
         public Category GetByName(string name)
         {
             return categoryDal.GetByName(name);

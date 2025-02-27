@@ -57,16 +57,20 @@ namespace ProductManagementSystem.BusinessLayer
         {
             return productDal.GetProductsWithCategory();
         }
-        /*public void ResetContext()
+        public void ResetContext()
         {
             productDal.ResetContext();
-        }*/
+        }
         public Context GetContext() { 
             return productDal._context;
         }
         public void AddCategoryToProduct(List<int> SelectedCategories, Product product)
         {
             productDal.AddCategoryToProduct(SelectedCategories, product);
+        }
+        public List<object> getProductsWithPrice()
+        {
+            return productDal.getProductsWithPrice();
         }
     }
 }

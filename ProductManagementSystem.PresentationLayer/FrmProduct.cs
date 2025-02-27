@@ -35,30 +35,42 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            
-            Product product = new Product()
+            Product product = null;
+            try
             {
-                Name = txtName.Text,
-                Price = decimal.Parse(txtPrice.Text),
-                Stock = int.Parse(txtStock.Text),
-                Description = txtDescription.Text,
-            };
+               product = new Product()
+                {
+                    Name = txtName.Text,
+                    Price = decimal.Parse(txtPrice.Text),
+                    Stock = int.Parse(txtStock.Text),
+                    Description = txtDescription.Text,
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please fill all areas correctly");
+                productManager.ResetContext();
+                categoryManager.ResetContext();
+                return;
+            }
 
-            productManager.AddCategoryToProduct(SelectedCategories, product);
 
 
             try
             {
-
                 productManager.Add(product);
+                productManager.AddCategoryToProduct(SelectedCategories, product);
                 MessageBox.Show("Product added");
                 btnClear_Click(sender, e);
+                SelectedCategories.Clear();
+                flowLayoutPanel1.Controls.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-                //productManager.ResetContext();
-     
+                MessageBox.Show("Please fill all areas correctly");
+                productManager.ResetContext();
+                categoryManager.ResetContext();
+
             }
         }
 
@@ -112,8 +124,9 @@ namespace ProductManagementSystem.PresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show("Please fill all areas correctly");
-               // productManager.ResetContext();
-               
+                productManager.ResetContext();
+                categoryManager.ResetContext();
+
             }
 
         }
@@ -292,9 +305,10 @@ namespace ProductManagementSystem.PresentationLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please fill all areas correctly"); 
-               // categoryManager.ResetContext();
-                
+                MessageBox.Show("Please fill all areas correctly");
+                productManager.ResetContext();
+                categoryManager.ResetContext();
+
             }
         }
 
@@ -318,7 +332,8 @@ namespace ProductManagementSystem.PresentationLayer
             catch (Exception ex)
             {
                 MessageBox.Show("Please fill all areas correctly");
-               // categoryManager.ResetContext();
+                productManager.ResetContext();
+                categoryManager.ResetContext();
 
             }
         }
@@ -328,15 +343,22 @@ namespace ProductManagementSystem.PresentationLayer
             Category category = null;
             int.TryParse(txtCategoryID.Text, out int id);
             category = categoryManager.Get(id);
-
             if (category == null)
             {
                 MessageBox.Show("Category not found");
                 return;
             }
-            MessageBox.Show("Category will be deleted permanenetly!");
-            categoryManager.Delete(category);
-            MessageBox.Show("Category Deleted");
+            DialogResult result = MessageBox.Show("Category will be deleted permanenetly!", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                categoryManager.Delete(category);
+                MessageBox.Show("Category Deleted");
+            }
+            else
+            {
+                return;
+            }
             updateCategoryCombo();
         }
 
@@ -386,7 +408,6 @@ namespace ProductManagementSystem.PresentationLayer
 
                     flowLayoutPanel1.Controls.Remove(newLabel); // Remove from FlowLayoutPanel
                     SelectedCategories.Remove(category.CategoryID);
-
                 };
 
                 // Add label to FlowLayoutPanel
@@ -396,7 +417,6 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void updateCategoryCombo()
         {
-         
             var values = categoryManager.GetAll();
             var categoryList = new List<Category>
                                 {

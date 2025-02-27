@@ -1,14 +1,7 @@
-﻿using System;
+﻿using ProductManagementSystem.EntityLayer.Concrete;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using ProductManagementSystem.EntityLayer.Concrete;
 
 namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 {
@@ -66,20 +59,24 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
                                     Category = getCategories(x.Categories) // Works in memory
                                 })
                                 .ToList();
-            
+
 
             return values.Cast<object>().ToList();
         }
-       /* public void ResetContext()
+        public void ResetContext()
         {
-            _context.Dispose();
-            _context = new Context();
-        }*/
+            var entries = _context.ChangeTracker.Entries().ToList();
+            foreach (var entry in entries)
+            {
+                entry.State = EntityState.Detached;
+            }
+        }
 
         public List<object> GetProductsWithCategory()
         {
             var values = _context.Products
                                 .Include(x => x.Categories) // Ensures categories are loaded
+                                .AsNoTracking()
                                 .ToList() // Brings data into memory, allowing string operations
                                 .Select(x => new
                                 {
@@ -87,7 +84,7 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
                                     Name = x.Name,
                                     Price = x.Price,
                                     Stock = x.Stock,
-                                    Category = getCategories(x.Categories) // Works in memory
+                                    Category = (x.Categories.Count() > 0) ? getCategories(x.Categories) : "no category" // Works in memory
                                 })
                                 .ToList();
 
@@ -95,6 +92,8 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 
             return values.Cast<object>().ToList();
         }
+
+
 
 
         public string getCategories(ICollection<Category> categories)
@@ -134,5 +133,20 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
                 _context.SaveChanges();
             }
         }
+
+        public List<object> getProductsWithPrice()
+        {
+            var values = _context.Products
+                                .Select(x => new
+                                {
+                                    ProductID = x.ProductId,
+                                    Name = x.Name,
+                                    Price = x.Price,
+                                })
+                                .ToList();
+
+            return values.Cast<object>().ToList();
+        }
     }
 }
+

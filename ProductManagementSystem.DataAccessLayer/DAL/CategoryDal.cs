@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -19,11 +20,14 @@ namespace ProductManagementSystem.DataAccessLayer.DAL
         {
             return _context.Categories.Where(c=>c.CategoryName==name).FirstOrDefault();
         }
-       /* public void ResetContext()
+        public void ResetContext()
         {
-            _context.Dispose();
-            _context = new Context();
-        }*/
+            var entries = _context.ChangeTracker.Entries().ToList();
+            foreach (var entry in entries)
+            {
+                entry.State = EntityState.Detached;
+            }
+        }
 
     }
 }
