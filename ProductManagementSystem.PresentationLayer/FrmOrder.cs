@@ -17,6 +17,7 @@ namespace ProductManagementSystem.PresentationLayer
     {
         ProductManager productManager;
         Context context;
+        private NumericUpDown numericUpDown = new NumericUpDown(); // Reusable control 
         public FrmOrder()
         {
             context = new Context();
@@ -78,36 +79,81 @@ namespace ProductManagementSystem.PresentationLayer
         {
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
             {
-                HeaderText = "Add",   // Column header
-                Text = "Add",       // Default button text
-                UseColumnTextForButtonValue = true, // Ensures the button displays text
-                Name = "btnAddProduct"       // Name for identification
+                HeaderText = "Action",
+                Name = "btnAddProduct",
+                UseColumnTextForButtonValue = false  // Allows setting text per cell
             };
 
-            dataGridView1.Columns.Add("Quantity", "Quantity"); // Add a new column
+            dataGridView1.Columns.Add("Quantity", "Quantity"); // Add Quantity column
+            dataGridView1.Columns.Add(buttonColumn); // Add button column
+
+            // Initialize rows with default values
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 row.Cells["Quantity"].Value = 0;
+                row.Cells["btnAddProduct"].Value = "Add"; // Set initial button text
             }
 
-
-            // Add the button column to DataGridView
-            dataGridView1.Columns.Add(buttonColumn);
-
-            // Subscribe to the CellClick event to handle button clicks
-
+            // Subscribe to events
             dataGridView1.CellClick += dataGridView1_CellContentClick;
-           
-            dataGridView1.CellEnter += dataGridView1_CellEnter;
+            dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
 
         }
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Ensure the user clicked within valid bounds
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Check if the clicked cell is the button column
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "btnAddProduct")
+                {
+                    DataGridViewButtonCell buttonCell = (DataGridViewButtonCell)dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
+                    // Get the quantity value
+                    int quantity = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value);
+
+                    if (quantity > 0)
+                    {
+                        // Toggle between "Add" and "Added"
+                        buttonCell.Value ="Added";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please set a quantity before adding.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    // 🔥 Refresh to apply changes
+                    dataGridView1.Refresh();
+                }
+            }
         }
 
-        private NumericUpDown numericUpDown = new NumericUpDown(); // Reusable control
+        
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "Quantity")
+            {
+                // Get the button cell in the same row
+                DataGridViewButtonCell buttonCell = (DataGridViewButtonCell)dataGridView1.Rows[e.RowIndex].Cells["btnAddProduct"];
+
+                // Get the quantity value
+                int quantity = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value);
+
+                // Change the button text based on the quantity
+                buttonCell.Value = (buttonCell.Value.ToString() == "Add") ? "Added" : "Add";
+
+                // 🔥 Refresh to update the UI
+                dataGridView1.Refresh();
+            }
+        }
+
+
+
+
+
 
         private void FrmOrder_Load(object sender, EventArgs e)
         {
