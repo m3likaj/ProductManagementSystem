@@ -79,7 +79,7 @@ namespace ProductManagementSystem.PresentationLayer
             var products = productManager.GetProductsWithCategory();
             pnlDetails.Visible = false;
             pnlIdProcess.Visible = false;
-            pnlCategories.Visible = false;
+          
             dataGridView1.Visible = true;
             dataGridView1.DataSource = products;
         }
@@ -94,8 +94,6 @@ namespace ProductManagementSystem.PresentationLayer
             txtID.Text = "";
             txtSearch.Text = "";
             cmbCategory.Text = "";
-            txtCategoryName.Text = "";
-            txtCategoryID.Text = "";
             txtSearch.Text = "";
         }
 
@@ -163,7 +161,6 @@ namespace ProductManagementSystem.PresentationLayer
         {
             pnlIdProcess.Visible = false;
             pnlDetails.Visible = false;
-            pnlCategories.Visible = false;
             dataGridView1.Visible = false;
             updateCategoryCombo();
         }
@@ -219,7 +216,6 @@ namespace ProductManagementSystem.PresentationLayer
             btnUpdate.Visible = false;
             txtID.Visible = false;
             lblID.Visible = false;
-            pnlCategories.Visible = false;
             SelectedCategories.Clear();
             flowLayoutPanel1.Controls.Clear();
             updateCategoryCombo();
@@ -236,7 +232,6 @@ namespace ProductManagementSystem.PresentationLayer
             btnUpdate.Visible = true;
             txtID.Visible = true;
             lblID.Visible = true;
-            pnlCategories.Visible=false;
             SelectedCategories.Clear();
             flowLayoutPanel1.Controls.Clear();
             updateCategoryCombo();
@@ -252,7 +247,6 @@ namespace ProductManagementSystem.PresentationLayer
             dataGridView1.Visible = false;
             btnAdd.Visible = false;
             btnUpdate.Visible = true;
-            pnlCategories.Visible = false;
            
         }
 
@@ -266,108 +260,9 @@ namespace ProductManagementSystem.PresentationLayer
             dataGridView1.Visible = false;
             btnAdd.Visible = false;
             btnUpdate.Visible = false;
-            pnlCategories.Visible = false;
+         
            
         }
-
-        private void btnShowMenu_Click(object sender, EventArgs e)
-        {
-            pnlMenu.Visible = !pnlMenu.Visible;
-           
-        }
-
-        private void btnCategoryMenu_Click(object sender, EventArgs e)
-        {
-            pnlCategories.Visible = true;
-            pnlIdProcess.Visible = false;
-            btnDelete.Visible = false;
-            pnlDetails.Visible = false;
-            dataGridView1.Visible = false;
-            btnAdd.Visible = false;
-            btnUpdate.Visible = false;
-            pnlCategories.Visible = true;
-            SelectedCategories.Clear();
-            
-        }
-
-        private void btnAddCategory_Click(object sender, EventArgs e)
-        {
-            Category category = new Category()
-            {
-                CategoryName = txtCategoryName.Text,
-            };
-            try
-            {
-                categoryManager.Add(category);
-                MessageBox.Show("Category added");
-                btnClear_Click(sender, e);
-                updateCategoryCombo();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Please fill all areas correctly");
-                productManager.ResetContext();
-                categoryManager.ResetContext();
-
-            }
-        }
-
-        private void btnUpdateCategory_Click(object sender, EventArgs e)
-        {
-            Category category = new Category()
-            {
-                CategoryID = int.Parse(txtID.Text),
-                CategoryName = txtCategoryName.Text,
-                
-            };
-
-
-            try
-            {
-                categoryManager.Update(category);
-                MessageBox.Show("Category updated");
-                btnClear_Click(sender, e);
-                updateCategoryCombo();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Please fill all areas correctly");
-                productManager.ResetContext();
-                categoryManager.ResetContext();
-
-            }
-        }
-
-        private void btnDeleteCategory_Click(object sender, EventArgs e)
-        {
-            Category category = null;
-            int.TryParse(txtCategoryID.Text, out int id);
-            category = categoryManager.Get(id);
-            if (category == null)
-            {
-                MessageBox.Show("Category not found");
-                return;
-            }
-            DialogResult result = MessageBox.Show("Category will be deleted permanenetly!", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                categoryManager.Delete(category);
-                MessageBox.Show("Category Deleted");
-            }
-            else
-            {
-                return;
-            }
-            updateCategoryCombo();
-        }
-
-        private void btnListCategory_Click(object sender, EventArgs e)
-        {
-            btnVeiwAll_Click(sender, e);
-            dataGridView1.DataSource = categoryManager.GetAll();
-        }
-
         private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get the selected item's text
@@ -430,6 +325,10 @@ namespace ProductManagementSystem.PresentationLayer
             cmbCategory.ValueMember = "CategoryID";
             cmbCategory.SelectedIndex = 0; 
 
+        }
+        private void btnShowMenu_Click(object sender, EventArgs e)
+        {
+            pnlMenu.Visible = !pnlMenu.Visible;
         }
     }
 }
