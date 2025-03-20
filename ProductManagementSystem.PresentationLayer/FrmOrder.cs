@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using ProductManagementSystem.BusinessLayer;
 using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.EntityLayer.Concrete;
@@ -32,7 +33,7 @@ namespace ProductManagementSystem.PresentationLayer
             int.TryParse(txtSearch.Text, out int id);
             product = productManager.Get(id);
 
-            if (product == null && !btnDelete.Visible)
+            if (product == null)
             {
                 var products = productManager.GetProductsByName(txtSearch.Text);
 
@@ -45,24 +46,18 @@ namespace ProductManagementSystem.PresentationLayer
                     MessageBox.Show("Product not found");
                     return;
                 }
-                MessageBox.Show("Product found");
-                var values = products.Select(x => new
-                {
-                    ProductID = ((Product)x).ProductId,
-                    Name = ((Product)x).Name,
-                    Price = ((Product)x).Price,
-                    Stock = ((Product)x).Stock,
-
-                }).ToList();
-
-               // dataGridView1.Columns.Clear();
-
-                //dataGridView1.DataSource = values.Cast<object>().ToList();
-
                 dataGridView1.DataSource = products;
-                
+                dataGridView1.Visible = true;
                 return;
             }
+
+            else
+            {
+                List<Product> productList = new List<Product>() { product };
+                dataGridView1.DataSource = productList;
+                dataGridView1.Visible = true;
+            }
+        
         }
 
         private void btnHistoryMenu_Click(object sender, EventArgs e)
