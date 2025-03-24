@@ -175,8 +175,7 @@
             this.btnHistoryMenu.TabIndex = 45;
             this.btnHistoryMenu.Text = "View Order History";
             this.btnHistoryMenu.UseVisualStyleBackColor = false;
-            this.btnHistoryMenu.Click += new System.EventHandler(this.btnHistoryMenu_Click);
-            // 
+           
             // btnAddMenu
             // 
             this.btnAddMenu.BackColor = System.Drawing.Color.SteelBlue;

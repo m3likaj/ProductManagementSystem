@@ -60,15 +60,12 @@ namespace ProductManagementSystem.PresentationLayer
         
         }
 
-        private void btnHistoryMenu_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void btnVeiwAll_Click(object sender, EventArgs e)
         {
 
-
+            dataGridView1.DataSource = productManager.getProductsWithPrice();
+            
         }
         private void add_columns_to_grid()
         {
