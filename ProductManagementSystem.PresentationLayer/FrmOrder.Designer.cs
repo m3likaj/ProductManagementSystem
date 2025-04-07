@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnShowMenu = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -37,7 +37,7 @@
             this.btnFetch = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnHistoryMenu = new System.Windows.Forms.Button();
-            this.btnAddMenu = new System.Windows.Forms.Button();
+            this.btnAllOrders = new System.Windows.Forms.Button();
             this.btnUpdateMenu = new System.Windows.Forms.Button();
             this.btnFetchMenu = new System.Windows.Forms.Button();
             this.btnDeleteMenu = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.pnlIdProcess.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -175,24 +175,25 @@
             this.btnHistoryMenu.TabIndex = 45;
             this.btnHistoryMenu.Text = "View Order History";
             this.btnHistoryMenu.UseVisualStyleBackColor = false;
-           
-            // btnAddMenu
             // 
-            this.btnAddMenu.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnAddMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddMenu.FlatAppearance.BorderSize = 0;
-            this.btnAddMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnAddMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnAddMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddMenu.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnAddMenu.ForeColor = System.Drawing.Color.White;
-            this.btnAddMenu.Location = new System.Drawing.Point(-13, 110);
-            this.btnAddMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAddMenu.Name = "btnAddMenu";
-            this.btnAddMenu.Size = new System.Drawing.Size(191, 98);
-            this.btnAddMenu.TabIndex = 44;
-            this.btnAddMenu.Text = "All Orders";
-            this.btnAddMenu.UseVisualStyleBackColor = false;
+            // btnAllOrders
+            // 
+            this.btnAllOrders.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnAllOrders.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAllOrders.FlatAppearance.BorderSize = 0;
+            this.btnAllOrders.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
+            this.btnAllOrders.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnAllOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAllOrders.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnAllOrders.ForeColor = System.Drawing.Color.White;
+            this.btnAllOrders.Location = new System.Drawing.Point(-13, 110);
+            this.btnAllOrders.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAllOrders.Name = "btnAllOrders";
+            this.btnAllOrders.Size = new System.Drawing.Size(191, 98);
+            this.btnAllOrders.TabIndex = 44;
+            this.btnAllOrders.Text = "All Orders";
+            this.btnAllOrders.UseVisualStyleBackColor = false;
+            this.btnAllOrders.Click += new System.EventHandler(this.btnAllOrders_Click);
             // 
             // btnUpdateMenu
             // 
@@ -252,7 +253,7 @@
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.SteelBlue;
             this.pnlMenu.Controls.Add(this.btnHistoryMenu);
-            this.pnlMenu.Controls.Add(this.btnAddMenu);
+            this.pnlMenu.Controls.Add(this.btnAllOrders);
             this.pnlMenu.Controls.Add(this.btnUpdateMenu);
             this.pnlMenu.Controls.Add(this.btnFetchMenu);
             this.pnlMenu.Controls.Add(this.btnDeleteMenu);
@@ -273,7 +274,7 @@
             this.btnVeiwAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVeiwAll.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnVeiwAll.ForeColor = System.Drawing.Color.White;
-            this.btnVeiwAll.Location = new System.Drawing.Point(-13, 7);
+            this.btnVeiwAll.Location = new System.Drawing.Point(-10, 7);
             this.btnVeiwAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnVeiwAll.Name = "btnVeiwAll";
             this.btnVeiwAll.Size = new System.Drawing.Size(191, 96);
@@ -298,14 +299,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(211, 162);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
@@ -372,31 +373,31 @@
             this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
-            // btnClear
+            // btnBack
             // 
-            this.btnClear.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.FlatAppearance.BorderSize = 0;
-            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(614, 648);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(147, 54);
-            this.btnClear.TabIndex = 49;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnBack.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
+            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(614, 648);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(147, 54);
+            this.btnBack.TabIndex = 49;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // FrmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 706);
-            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.button1);
@@ -428,7 +429,7 @@
         private System.Windows.Forms.Button btnFetch;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnHistoryMenu;
-        private System.Windows.Forms.Button btnAddMenu;
+        private System.Windows.Forms.Button btnAllOrders;
         private System.Windows.Forms.Button btnUpdateMenu;
         private System.Windows.Forms.Button btnFetchMenu;
         private System.Windows.Forms.Button btnDeleteMenu;
@@ -439,6 +440,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnBack;
     }
 }
