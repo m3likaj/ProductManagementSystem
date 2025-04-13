@@ -26,42 +26,77 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
             }).ToList();
             return values.Cast<IEnumerable<object>>().ToList();
         }
-        public List<object> GetProductsByCategory(string category)
+        public List<object> GetProductsByCategory(string category, bool productPage=true)
         {
-            var values = _context.Products
-                                .Where(p => p.Categories.Any(c => c.CategoryName == category))
-                                .Include(x => x.Categories) // Ensures categories are loaded
-                                .ToList() // Brings data into memory, allowing string operations
-                                .Select(x => new
-                                {
-                                    ProductID = x.ProductId,
-                                    Name = x.Name,
-                                    Price = x.Price,
-                                    Stock = x.Stock,
-                                    Category = getCategories(x.Categories) // Works in memory
-                                })
-                                .ToList();
-            return values.Cast<object>().ToList();
+            if (productPage)
+            {
+                var values = _context.Products
+                                    .Where(p => p.Categories.Any(c => c.CategoryName == category))
+                                    .Include(x => x.Categories) // Ensures categories are loaded
+                                    .ToList() // Brings data into memory, allowing string operations
+                                    .Select(x => new
+                                    {
+                                        ProductID = x.ProductId,
+                                        Name = x.Name,
+                                        Price = x.Price,
+                                        Stock = x.Stock,
+                                        Category = getCategories(x.Categories) // Works in memory
+                                    })
+                                    .ToList();
+
+                return values.Cast<object>().ToList();
+            }
+            else
+            {
+                var values = _context.Products
+                                    .Where(p => p.Categories.Any(c => c.CategoryName == category) && p.Stock>0)
+                                    .Include(x => x.Categories) // Ensures categories are loaded
+                                    .ToList() // Brings data into memory, allowing string operations
+                                    .Select(x => new
+                                    {
+                                        ProductID = x.ProductId,
+                                        Name = x.Name,
+                                        Price = x.Price
+                                    })
+                                    .ToList();
+
+                return values.Cast<object>().ToList();
+            }
         }
 
-        public List<object> GetProductByName(string name)
+        public List<object> GetProductByName(string name, bool productsPage=true)
         {
-            var values = _context.Products
-                                .Where(x => x.Name == name)
-                                .Include(x => x.Categories) // Ensures categories are loaded
-                                .ToList() // Brings data into memory, allowing string operations
-                                .Select(x => new
-                                {
-                                    ProductID = x.ProductId,
-                                    Name = x.Name,
-                                    Price = x.Price,
-                                    Stock = x.Stock,
-                                    Category = getCategories(x.Categories) // Works in memory
-                                })
-                                .ToList();
-
-
-            return values.Cast<object>().ToList();
+            name = name.ToLower();
+            if (productsPage)
+            {
+                var values = _context.Products
+                                    .Where(x => x.Name.ToLower().Contains(name))
+                                    .Include(x => x.Categories) // Ensures categories are loaded
+                                    .ToList() // Brings data into memory, allowing string operations
+                                    .Select(x => new
+                                    {
+                                        ProductID = x.ProductId,
+                                        Name = x.Name,
+                                        Price = x.Price,
+                                        Stock = x.Stock,
+                                        Category = getCategories(x.Categories) // Works in memory
+                                    })
+                                    .ToList();
+                return values.Cast<object>().ToList();
+            }
+            else
+            {
+                var values = _context.Products
+                                   .Where(x => x.Name.ToLower().Contains(name) && x.Stock>0)
+                                   .Select(x => new
+                                   {
+                                       ProductID = x.ProductId,
+                                       Name = x.Name,
+                                       Price = x.Price,
+                                   })
+                                   .ToList();
+                return values.Cast<object>().ToList();
+            }
         }
         public void ResetContext()
         {
@@ -147,6 +182,7 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 
             return values.Cast<object>().ToList();
         }
+       
     }
 }
 

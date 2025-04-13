@@ -12,14 +12,14 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
 {
     public class CustomerDal : GenericFunctions<Customer>
     {
-        Context context;
-        public CustomerDal()
+        public Context _context;
+        public CustomerDal(Context context)
         {
-            context = new Context();
+            _context = context;
         }
         public List<IEnumerable<object>> GetOrderHistory(int id)
         {
-            var values = context.Invoices.Where(inv => inv.CustomerID == id).Select(i => new
+            var values = _context.Invoices.Where(inv => inv.CustomerID == id).Select(i => new
             {
                 order = i.Orders.Select(o => new
                 {
@@ -32,15 +32,15 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
         }
         public Customer GetCustomerByPhone(string phone)
         {
-            return context.Customers.Where(x => x.PhoneNumber == phone).FirstOrDefault();
+            return _context.Customers.Where(x => x.PhoneNumber == phone).FirstOrDefault();
         }
         public Customer GetCustomerByEmail(string email)
         {
-            return context.Customers.Where(x => x.Email == email).FirstOrDefault();
+            return _context.Customers.Where(x => x.Email == email).FirstOrDefault();
         }
         public List<Customer> GetCustomerByName(string name)
         {
-            var values = context.Customers
+            var values = _context.Customers
                 .Where(x => DbFunctions.Like(x.Name + " " + x.Surname, "%" + name + "%"))
                 .ToList();
 
@@ -48,8 +48,8 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
         }
         public void ResetContext()
         {
-            context.Dispose();
-            context = new Context();
+            _context.Dispose();
+            _context = new Context();
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ProductManagementSystem.EntityLayer.Concrete;
+using System.Collections.Generic;
 using System.Linq;
-using ProductManagementSystem.DataAccessLayer.EntityFramework;
-using ProductManagementSystem.EntityLayer.Concrete;
 
 namespace ProductManagementSystem.DataAccessLayer.DAL
 {
@@ -26,7 +25,7 @@ namespace ProductManagementSystem.DataAccessLayer.DAL
                                                   o.Quantity,
                                                   TotalPrice = o.Quantity * p.Price
                                               }).ToList();
-            return values.Cast <object>().ToList();
+            return values.Cast<object>().ToList();
         }
         public List<object> GetOrders()
         {
@@ -36,9 +35,11 @@ namespace ProductManagementSystem.DataAccessLayer.DAL
                                 .Select(x => new
                                 {
                                     OrderID = x.OrderId,
-                                    Products = (x.OrderProducts.Count() > 0) ? getProducts(x.OrderProducts) : "no products" ,// Works in memory
+                                    Customer = x.Customer.Name + " " + x.Customer.Surname,
+                                    Products = (x.OrderProducts.Count() > 0) ? getProducts(x.OrderProducts) : "no products",// Works in memory
                                     Price = x.TotalPrice,
                                     Status = x.OrderStatus
+
                                 })
                                 .ToList();
 
@@ -48,7 +49,7 @@ namespace ProductManagementSystem.DataAccessLayer.DAL
         {
             string Products = "";
             foreach (OrderProduct item in products)
-                Products += item.Product.Name + " x " + item.Quantity.ToString()+ ", ";
+                Products += item.Product.Name + " x " + item.Quantity.ToString() + ", ";
 
             return Products.TrimEnd(',', ' ');
         }

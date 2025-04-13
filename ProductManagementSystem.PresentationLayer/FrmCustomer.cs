@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using ProductManagementSystem.BusinessLayer;
+using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.EntityLayer.Concrete;
 
 namespace ProductManagementSystem.PresentationLayer
@@ -9,9 +10,10 @@ namespace ProductManagementSystem.PresentationLayer
     public partial class FrmCustomer : Form
     {
         private readonly CustomerManager customerManager;
+        Context context = new Context();
         public FrmCustomer()
         {
-            customerManager = new CustomerManager();
+            customerManager = new CustomerManager(context);
             InitializeComponent();
         }
 

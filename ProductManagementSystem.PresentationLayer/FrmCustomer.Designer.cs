@@ -79,7 +79,7 @@
             this.txtID.Location = new System.Drawing.Point(165, 27);
             this.txtID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(257, 30);
+            this.txtID.Size = new System.Drawing.Size(257, 26);
             this.txtID.TabIndex = 31;
             // 
             // lblID
@@ -90,7 +90,7 @@
             this.lblID.ForeColor = System.Drawing.Color.Black;
             this.lblID.Location = new System.Drawing.Point(24, 27);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(135, 27);
+            this.lblID.Size = new System.Drawing.Size(112, 23);
             this.lblID.TabIndex = 30;
             this.lblID.Text = "Customer ID :";
             // 
@@ -204,7 +204,7 @@
             this.txtAddress.Location = new System.Drawing.Point(165, 281);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(257, 30);
+            this.txtAddress.Size = new System.Drawing.Size(257, 26);
             this.txtAddress.TabIndex = 24;
             // 
             // label4
@@ -215,7 +215,7 @@
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(59, 282);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 27);
+            this.label4.Size = new System.Drawing.Size(83, 23);
             this.label4.TabIndex = 23;
             this.label4.Text = "Address :";
             // 
@@ -228,7 +228,7 @@
             this.txtPhone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPhone.MaxLength = 10;
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(257, 30);
+            this.txtPhone.Size = new System.Drawing.Size(257, 26);
             this.txtPhone.TabIndex = 22;
             // 
             // label3
@@ -239,7 +239,7 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(75, 225);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 27);
+            this.label3.Size = new System.Drawing.Size(68, 23);
             this.label3.TabIndex = 21;
             this.label3.Text = "Phone :";
             // 
@@ -251,7 +251,7 @@
             this.txtEmail.Location = new System.Drawing.Point(165, 171);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(257, 31);
+            this.txtEmail.Size = new System.Drawing.Size(257, 26);
             this.txtEmail.TabIndex = 20;
             // 
             // label1
@@ -262,7 +262,7 @@
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(82, 171);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 27);
+            this.label1.Size = new System.Drawing.Size(60, 23);
             this.label1.TabIndex = 19;
             this.label1.Text = "Email :";
             // 
@@ -275,7 +275,7 @@
             this.txtFirstName.Location = new System.Drawing.Point(165, 76);
             this.txtFirstName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(257, 30);
+            this.txtFirstName.Size = new System.Drawing.Size(257, 26);
             this.txtFirstName.TabIndex = 18;
             // 
             // label2
@@ -286,7 +286,7 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(38, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 27);
+            this.label2.Size = new System.Drawing.Size(100, 23);
             this.label2.TabIndex = 17;
             this.label2.Text = "First Name :";
             // 
@@ -299,7 +299,7 @@
             this.txtSurName.Location = new System.Drawing.Point(165, 119);
             this.txtSurName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSurName.Name = "txtSurName";
-            this.txtSurName.Size = new System.Drawing.Size(257, 30);
+            this.txtSurName.Size = new System.Drawing.Size(257, 26);
             this.txtSurName.TabIndex = 34;
             // 
             // label
@@ -310,7 +310,7 @@
             this.label.ForeColor = System.Drawing.Color.Black;
             this.label.Location = new System.Drawing.Point(44, 124);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(111, 27);
+            this.label.Size = new System.Drawing.Size(92, 23);
             this.label.TabIndex = 33;
             this.label.Text = "Sur Name :";
             // 
@@ -501,7 +501,7 @@
             this.txtSearch.Location = new System.Drawing.Point(148, 23);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(257, 30);
+            this.txtSearch.Size = new System.Drawing.Size(257, 26);
             this.txtSearch.TabIndex = 38;
             // 
             // label7
@@ -512,7 +512,7 @@
             this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(55, 24);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 27);
+            this.label7.Size = new System.Drawing.Size(63, 23);
             this.label7.TabIndex = 37;
             this.label7.Text = "Search";
             // 
@@ -546,7 +546,7 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(308, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(512, 52);
+            this.label6.Size = new System.Drawing.Size(417, 42);
             this.label6.TabIndex = 38;
             this.label6.Text = "Customer Management Page";
             // 
@@ -581,7 +581,7 @@
             // 
             // FrmCustomer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(998, 727);

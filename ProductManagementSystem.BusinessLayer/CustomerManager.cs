@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.DataAccessLayer.EntityFramework;
 using ProductManagementSystem.EntityLayer.Concrete;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 
 namespace ProductManagementSystem.BusinessLayer
 {
     public class CustomerManager
     {
-        CustomerDal customerDal = new CustomerDal();
+        CustomerDal customerDal;
+        public CustomerManager(DataAccessLayer.Context context)
+        {
+            customerDal = new CustomerDal(context);
+        }
+
         public List<Customer> GetAll()
         {
             return customerDal.GetAll();
@@ -23,7 +25,7 @@ namespace ProductManagementSystem.BusinessLayer
         }
         public void Add(Customer entity)
         {
-      
+
             customerDal.Add(entity);
         }
         public void Update(Customer entity)

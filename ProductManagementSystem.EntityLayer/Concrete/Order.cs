@@ -17,8 +17,10 @@ namespace ProductManagementSystem.EntityLayer.Concrete
 
         [Required]
         public decimal TotalPrice { get; set; }
-
+        [Required]
         public string OrderStatus { get; set; }
-        
+        [Required]
+        public int CustomerID { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

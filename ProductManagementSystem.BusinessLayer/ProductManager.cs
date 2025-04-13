@@ -45,13 +45,13 @@ namespace ProductManagementSystem.BusinessLayer
         }
 
 
-        public List<object> GetProductsByName(string name)
+        public List<object> GetProductsByName(string name, bool productPage = true)
         {
-            return productDal.GetProductByName(name);
+            return productDal.GetProductByName(name, productPage);
         }
-        public List<object> GetProductsByCategory(string category)
+        public List<object> GetProductsByCategory(string category, bool productPage=true)
         {
-            return productDal.GetProductsByCategory(category);
+            return productDal.GetProductsByCategory(category, productPage);
         }
         public List<object> GetProductsWithCategory()
         {
