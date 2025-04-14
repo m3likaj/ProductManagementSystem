@@ -71,17 +71,17 @@
     <Compile Include="FrmCustomer.Designer.cs">
       <DependentUpon>FrmCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMenu.Designer.cs">
+      <DependentUpon>FrmMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmOrder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmOrder.Designer.cs">
       <DependentUpon>FrmOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPayment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmPayment.Designer.cs">
-      <DependentUpon>FrmPayment.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmProduct.cs">
       <SubType>Form</SubType>
@@ -96,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCustomer.resx">
       <DependentUpon>FrmCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMenu.resx">
+      <DependentUpon>FrmMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmOrder.resx">
       <DependentUpon>FrmOrder.cs</DependentUpon>

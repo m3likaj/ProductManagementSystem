@@ -50,7 +50,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnFetch = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.btnHistoryMenu = new System.Windows.Forms.Button();
             this.btnAddMenu = new System.Windows.Forms.Button();
             this.btnUpdateMenu = new System.Windows.Forms.Button();
             this.btnFetchMenu = new System.Windows.Forms.Button();
@@ -331,7 +330,6 @@
             this.btnOrdersHistory.TabIndex = 35;
             this.btnOrdersHistory.Text = "View Order History";
             this.btnOrdersHistory.UseVisualStyleBackColor = false;
-            this.btnOrdersHistory.Click += new System.EventHandler(this.ViewOrders_Click);
             // 
             // btnClear
             // 
@@ -374,7 +372,6 @@
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.SteelBlue;
-            this.pnlMenu.Controls.Add(this.btnHistoryMenu);
             this.pnlMenu.Controls.Add(this.btnAddMenu);
             this.pnlMenu.Controls.Add(this.btnUpdateMenu);
             this.pnlMenu.Controls.Add(this.btnFetchMenu);
@@ -384,25 +381,6 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(180, 642);
             this.pnlMenu.TabIndex = 38;
-            // 
-            // btnHistoryMenu
-            // 
-            this.btnHistoryMenu.BackColor = System.Drawing.Color.SteelBlue;
-            this.btnHistoryMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHistoryMenu.FlatAppearance.BorderSize = 0;
-            this.btnHistoryMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkBlue;
-            this.btnHistoryMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnHistoryMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHistoryMenu.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnHistoryMenu.ForeColor = System.Drawing.Color.White;
-            this.btnHistoryMenu.Location = new System.Drawing.Point(-4, 507);
-            this.btnHistoryMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnHistoryMenu.Name = "btnHistoryMenu";
-            this.btnHistoryMenu.Size = new System.Drawing.Size(191, 98);
-            this.btnHistoryMenu.TabIndex = 45;
-            this.btnHistoryMenu.Text = "View Order History";
-            this.btnHistoryMenu.UseVisualStyleBackColor = false;
-            this.btnHistoryMenu.Click += new System.EventHandler(this.btnHistoryMenu_Click);
             // 
             // btnAddMenu
             // 
@@ -636,7 +614,6 @@
         private System.Windows.Forms.Panel pnlDetails;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Button btnHistoryMenu;
         private System.Windows.Forms.Button btnShowMenu;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label7;

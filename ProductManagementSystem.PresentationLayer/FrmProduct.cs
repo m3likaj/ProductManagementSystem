@@ -329,6 +329,8 @@ namespace ProductManagementSystem.PresentationLayer
         private void btnShowMenu_Click(object sender, EventArgs e)
         {
             pnlMenu.Visible = !pnlMenu.Visible;
+            var menuForm = new FrmMenu();
+            menuForm.Show();
         }
     }
 }

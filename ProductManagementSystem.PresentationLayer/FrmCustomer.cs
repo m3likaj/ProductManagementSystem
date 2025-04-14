@@ -125,27 +125,6 @@ namespace ProductManagementSystem.PresentationLayer
             }
         }
 
-        private void ViewOrders_Click(object sender, EventArgs e)
-        {
-            Customer customer = null;
-            int.TryParse(txtSearch.Text, out int id);
-            customer = customerManager.Get(id);
-            if (customer == null)
-            {
-                customer = customerManager.GetCustomerByPhone(txtSearch.Text);
-            }
-            if (customer == null)
-            {
-                customer = customerManager.GetCustomerByEmail(txtSearch.Text);
-            }
-            if (customer == null)
-            {
-                MessageBox.Show("Customer not found");
-                return;
-            }
-            var values = customerManager.GetOrderHistory(customer.CustomerID);
-            dataGridView1.DataSource = values;
-        }
 
         private void FrmCustomer_Load(object sender, EventArgs e)
         {
@@ -250,6 +229,8 @@ namespace ProductManagementSystem.PresentationLayer
         private void btnShowMenu_Click(object sender, EventArgs e)
         {
             pnlMenu.Visible = !pnlMenu.Visible;
+            var menuForm = new FrmMenu();
+            menuForm.Show();
         }
 
         private void btnHistoryMenu_Click(object sender, EventArgs e)

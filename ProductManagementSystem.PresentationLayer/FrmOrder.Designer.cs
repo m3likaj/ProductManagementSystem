@@ -91,6 +91,7 @@
             this.btnShowMenu.TabIndex = 45;
             this.btnShowMenu.Text = "Menu";
             this.btnShowMenu.UseVisualStyleBackColor = false;
+            this.btnShowMenu.Click += new System.EventHandler(this.btnShowMenu_Click);
             // 
             // label6
             // 

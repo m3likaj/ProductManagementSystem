@@ -455,6 +455,12 @@ namespace ProductManagementSystem.PresentationLayer
             pnlFindCustomer.Visible = false;
             pnlCDetails.Visible = false;
         }
+
+        private void btnShowMenu_Click(object sender, EventArgs e)
+        {
+            var menuForm = new FrmMenu();
+            menuForm.Show();
+        }
     }
 }
 
