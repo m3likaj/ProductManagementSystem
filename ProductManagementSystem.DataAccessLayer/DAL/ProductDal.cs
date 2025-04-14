@@ -13,19 +13,7 @@ namespace ProductManagementSystem.DataAccessLayer.EntityFramework
             _context = context;
         }
 
-        public List<IEnumerable<object>> GetOrderHistory(int id)
-        {
-            var values = _context.Invoices.Where(inv => inv.CustomerID == id).Select(i => new
-            {
-                order = i.Orders.Select(o => new
-                {
-                    o.OrderId,
-                    product = o.OrderProducts.Where(op => o.OrderId == op.OrderID).Select(p => p.ProductID)
-
-                })
-            }).ToList();
-            return values.Cast<IEnumerable<object>>().ToList();
-        }
+        
         public List<object> GetProductsByCategory(string category, bool productPage=true)
         {
             if (productPage)

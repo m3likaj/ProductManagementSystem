@@ -28,6 +28,10 @@ namespace ProductManagementSystem.BusinessLayer
         {
             return orderDal.Get(id);
         }
+        public void Update(Order order)
+        {
+            orderDal.Update(order);
+        }
         public List<object> GetOrderByCustomer(string name)
         {
             return orderDal.GetOrderByCustomer(name);

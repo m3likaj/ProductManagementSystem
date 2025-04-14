@@ -39,10 +39,7 @@ namespace ProductManagementSystem.BusinessLayer
             productDal.Delete(customer);
 
         }
-        public List<IEnumerable<object>> GetOrderHistory(int id)
-        {
-            return productDal.GetOrderHistory(id);
-        }
+       
 
 
         public List<object> GetProductsByName(string name, bool productPage = true)

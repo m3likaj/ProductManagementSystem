@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace ProductManagementSystem.EntityLayer.Concrete
         public int InvoiceID { get; set; }
 
         [Required]
-        public List<Order> Orders { get; set; }
+        public int OrderID { get; set; }
+       
 
         [Required]
         public int CustomerID { get; set; }
@@ -23,5 +25,6 @@ namespace ProductManagementSystem.EntityLayer.Concrete
 
         [Required]
         public DateTime InvoiceDate { get; set; }
+        
     }
 }

@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using ProductManagementSystem.BusinessLayer;
 using ProductManagementSystem.DataAccessLayer;
 using ProductManagementSystem.EntityLayer.Concrete;
+
 
 namespace ProductManagementSystem.PresentationLayer
 {
@@ -17,6 +24,7 @@ namespace ProductManagementSystem.PresentationLayer
         OrderManager orderManager;
         Context context;
         CustomerManager customerManager;
+        InvoiceManager invoiceManager;
         private Dictionary<int, int> productQuantities = new Dictionary<int, int>();
         bool MakeOrder = true;
         Order order;
@@ -27,6 +35,7 @@ namespace ProductManagementSystem.PresentationLayer
             productManager = new ProductManager(context);
             orderManager = new OrderManager(context);
             customerManager = new CustomerManager(context);
+            invoiceManager = new InvoiceManager(context);
             InitializeComponent();
 
         }
@@ -108,7 +117,8 @@ namespace ProductManagementSystem.PresentationLayer
                     btnDone.Visible = true;
                     return;
                 }
-                else {
+                else
+                {
                     var retrievedOrder = new
                     {
                         OrderID = o.OrderId,
@@ -122,6 +132,7 @@ namespace ProductManagementSystem.PresentationLayer
                     dataGridView1.DataSource = orderList;
                     dataGridView1.Visible = true;
                     add_columns_to_grid();
+
                 }
             }
 
@@ -131,50 +142,74 @@ namespace ProductManagementSystem.PresentationLayer
         private void btnMakeOrder_Click(object sender, EventArgs e)
         {
             MakeOrder = true;
+            pnlOrderID.Visible = false;
             dataGridView1.Columns.Clear(); // Clear old columns to prevent duplication
             dataGridView1.DataSource = productManager.getProductsWithPrice();
             add_columns_to_grid(); // Add quantity and buttons again
             btnConfirm.Visible = false;
             btnDone.Visible = true;
             btnBack.Visible = false;
-            btnManage.Visible = false;
+            btnCancel.Visible = false;
+            pnlIdProcess.Visible = true;
+            btnInvoice.Visible = false;
+            pnlAddCustomer.Visible = false;
+            dataGridView1.Visible = true; // Show the DataGridView
         }
 
         private void add_columns_to_grid()
         {
             dataGridView1.CellContentClick -= dataGridView1_CellContentClick;
-            DataGridViewButtonColumn buttonColumnAdd = new DataGridViewButtonColumn
+            if (MakeOrder)
             {
-                HeaderText = "Add",
-                Name = "btnAddProduct",
-                UseColumnTextForButtonValue = false  // Allows setting text per cell
-            };
-            DataGridViewButtonColumn buttonColumnRemove = new DataGridViewButtonColumn
-            {
-                HeaderText = "Remove",
-                Name = "btnRemoveProduct",
-                UseColumnTextForButtonValue = false  // Allows setting text per cell
-            };
-
-            dataGridView1.Columns.Add("Quantity", "Quantity"); // Add Quantity column
-            dataGridView1.Columns.Add(buttonColumnAdd); // Add button column
-            dataGridView1.Columns.Add(buttonColumnRemove); // Add button column
-
-            // Initialize rows with default values
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                int productId = Convert.ToInt32(row.Cells["ProductID"].Value);
-                if (productQuantities.TryGetValue(productId, out int savedQty))
+                DataGridViewButtonColumn buttonColumnAdd = new DataGridViewButtonColumn
                 {
-                    row.Cells["Quantity"].Value = savedQty;
-                }
-                else
+                    HeaderText = "Add",
+                    Name = "btnAddProduct",
+                    UseColumnTextForButtonValue = false  // Allows setting text per cell
+                };
+                DataGridViewButtonColumn buttonColumnRemove = new DataGridViewButtonColumn
                 {
-                    row.Cells["Quantity"].Value = 0;
-                }
+                    HeaderText = "Remove",
+                    Name = "btnRemoveProduct",
+                    UseColumnTextForButtonValue = false  // Allows setting text per cell
+                };
 
-                row.Cells["btnAddProduct"].Value = "Add"; // Set initial button text
-                row.Cells["btnRemoveProduct"].Value = "Remove";
+                dataGridView1.Columns.Add("Quantity", "Quantity"); // Add Quantity column
+                dataGridView1.Columns.Add(buttonColumnAdd); // Add button column
+                dataGridView1.Columns.Add(buttonColumnRemove); // Add button column
+
+                // Initialize rows with default values
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    int productId = Convert.ToInt32(row.Cells["ProductID"].Value);
+                    if (productQuantities.TryGetValue(productId, out int savedQty))
+                    {
+                        row.Cells["Quantity"].Value = savedQty;
+                    }
+                    else
+                    {
+                        row.Cells["Quantity"].Value = 0;
+                    }
+
+                    row.Cells["btnAddProduct"].Value = "Add"; // Set initial button text
+                    row.Cells["btnRemoveProduct"].Value = "Remove";
+                }
+            }
+            else
+            {
+                DataGridViewButtonColumn buttonColumnManage = new DataGridViewButtonColumn
+                {
+                    HeaderText = "Details",
+                    Name = "btnOrderDetails",
+                    UseColumnTextForButtonValue = false  // Allows setting text per cell
+                };
+
+                dataGridView1.Columns.Add(buttonColumnManage); // Add button column
+                                                               // Initialize rows with default values
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    row.Cells["btnOrderDetails"].Value = "Details";
+                }
             }
 
             // Subscribe to events
@@ -207,7 +242,7 @@ namespace ProductManagementSystem.PresentationLayer
                         quantity++;
                         productQuantities[productId] = quantity;
                         dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value = quantity;
-                    } 
+                    }
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "btnRemoveProduct")
                 {
@@ -228,19 +263,31 @@ namespace ProductManagementSystem.PresentationLayer
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "btnOrderDetails")
                 {
-            
+
                     int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["OrderID"].Value);
+                    lblOrderId.Text = id.ToString();
                     dataGridView1.Columns.Clear(); // Clear old columns to prevent duplication
                     dataGridView1.DataSource = orderManager.GetOrderDetails(id);
                     btnBack.Visible = true;
-                    btnManage.Visible = true;
+                    pnlIdProcess.Visible = false;
+                    pnlOrderID.Visible = true;
+                    if (orderManager.Get(id).OrderStatus == "Canceled")
+                    {
+                        btnCancel.Visible = false;
+                        btnInvoice.Visible = false;
+                    }
+                    else
+                    {
+                        btnCancel.Visible = true;
+                        btnInvoice.Visible = true;
+                    }
                 }
-                    dataGridView1.Refresh();
+                dataGridView1.Refresh();
             }
         }
 
 
-        
+
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
@@ -255,17 +302,17 @@ namespace ProductManagementSystem.PresentationLayer
             {
                 if (row.IsNewRow) continue;
                 int.TryParse(row.Cells["Quantity"].Value.ToString(), out int qty);
-
+                if (qty <= 0) continue;// Skip if quantity is not valid
                 int productId = Convert.ToInt32(row.Cells["ProductID"].Value);
                 Product product = productManager.Get(productId);
-               
+
 
                 order.OrderProducts.Add(new OrderProduct
                 {
                     OrderID = order.OrderId,
                     ProductID = product.ProductId,
                     Quantity = qty,
-                    
+
                 });
                 order.TotalPrice += product.Price * qty;
 
@@ -277,7 +324,12 @@ namespace ProductManagementSystem.PresentationLayer
                 pnlCDetails.Visible = false;
                 pnlFindCustomer.Visible = false;
                 btnGoToCustomerPage.Visible = false;
-                
+                btnConfirm.Visible = false;
+                btnBack.Visible = true;
+                txtFindCustomer.Text = "";
+                txtSearch.Text = "";
+                rbExisting.Checked = false;
+                rbNew.Checked = false;
             }
             else
             {
@@ -296,7 +348,7 @@ namespace ProductManagementSystem.PresentationLayer
 
                 if (row.Cells["Quantity"].Value != null &&
                     int.TryParse(row.Cells["Quantity"].Value.ToString(), out int qty) &&
-                    qty > 0)  
+                    qty > 0)
                 {
                     int productId = Convert.ToInt32(row.Cells["ProductID"].Value);
                     Product product = productManager.Get(productId);
@@ -338,6 +390,7 @@ namespace ProductManagementSystem.PresentationLayer
 
             btnConfirm.Visible = true;
             btnDone.Visible = false;
+            btnBack.Visible = true;
         }
 
 
@@ -355,31 +408,20 @@ namespace ProductManagementSystem.PresentationLayer
 
         private void btnManageOrders_Click(object sender, EventArgs e)
         {
+            pnlOrderID.Visible = false;
             MakeOrder = false;
             btnDone.Visible = false;
             btnBack.Visible = false;
             btnConfirm.Visible = false;
-            btnManage.Visible = false;
+            btnCancel.Visible = false;
+            pnlIdProcess.Visible = true;
+            btnInvoice.Visible = false;
+            pnlAddCustomer.Visible = false;
             dataGridView1.Columns.Clear(); // Clear old columns to prevent duplication
             dataGridView1.DataSource = orderManager.GetOrders();
+            add_columns_to_grid(); // Add details button
+            dataGridView1.Visible = true; // Show the DataGridView
 
-            dataGridView1.CellContentClick -= dataGridView1_CellContentClick;
-            DataGridViewButtonColumn buttonColumnManage = new DataGridViewButtonColumn
-            {
-                HeaderText = "Details",
-                Name = "btnOrderDetails",
-                UseColumnTextForButtonValue = false  // Allows setting text per cell
-            };
-            
-            dataGridView1.Columns.Add(buttonColumnManage); // Add button column
-            // Initialize rows with default values
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                row.Cells["btnOrderDetails"].Value = "Details";
-            }
-            // Subscribe to events
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            
         }
 
         private void btnFindCustomer_Click(object sender, EventArgs e)
@@ -395,7 +437,7 @@ namespace ProductManagementSystem.PresentationLayer
             {
                 customer = customerManager.GetCustomerByEmail(txtSearch.Text);
             }
-            if(customer == null)
+            if (customer == null)
             {
                 MessageBox.Show("Customer not Found");
             }
@@ -420,7 +462,7 @@ namespace ProductManagementSystem.PresentationLayer
             int.TryParse(lblCid.Text, out int id);
             Customer customer = customerManager.Get(id);
             order.CustomerID = id;
-            
+
             foreach (var item in order.OrderProducts)
             {
                 Product product = productManager.Get(item.ProductID);
@@ -439,7 +481,7 @@ namespace ProductManagementSystem.PresentationLayer
             dataGridView1.DataSource = productManager.getProductsWithPrice();
             add_columns_to_grid(); // Add quantity and buttons again
             btnMakeOrder_Click(sender, e);
-         
+
         }
 
         private void rbExisting_CheckedChanged(object sender, EventArgs e)
@@ -461,7 +503,105 @@ namespace ProductManagementSystem.PresentationLayer
             var menuForm = new FrmMenu();
             menuForm.Show();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to cancel the order?",
+                                      "Confirm Cancellation",
+                                      MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                Order canceled = orderManager.Get(Convert.ToInt32(lblOrderId.Text));
+                canceled.OrderStatus = "Canceled";
+                foreach (var item in canceled.OrderProducts)
+                {
+                    Product product = productManager.Get(item.ProductID);
+                    product.Stock += item.Quantity;
+                    productManager.Update(product);
+                }
+                orderManager.Update(canceled);
+                MessageBox.Show("Order Canceled");
+                btnCancel.Visible = false;
+                btnInvoice.Visible = false;
+            }
+        }
+
+        private void btnInvoice_Click(object sender, EventArgs e)
+        {
+            Order invoicedOrder = orderManager.Get(Convert.ToInt32(lblOrderId.Text));
+            Invoice invoice;
+            if (invoicedOrder.OrderStatus == "Invoiced")
+            {
+                invoice =  invoiceManager.GetByOrder(invoicedOrder.OrderId);
+            }
+            else
+            {
+                invoicedOrder.OrderStatus = "Invoiced";
+                orderManager.Update(invoicedOrder);
+                invoice = new Invoice
+                {
+                    OrderID = invoicedOrder.OrderId,
+                    CustomerID = invoicedOrder.CustomerID,
+                    TotalPrice = invoicedOrder.TotalPrice,
+                    InvoiceDate = DateTime.Now
+                };
+                invoiceManager.Add(invoice);
+            }
+            string folderPath = @"C:\Users\Biriz Teknoloji\source\repos\m3likaj\ProductManagementSystem\ProductManagementSystem.PresentationLayer\Invoices";
+            string filePath = Path.Combine(folderPath, $"Invoice_{invoice.InvoiceID}.pdf"); // ✅ valid file path
+            using (PdfWriter writer = new PdfWriter(filePath))
+            {
+                using (PdfDocument pdf = new PdfDocument(writer))
+                {
+                    Document doc = new Document(pdf);
+                    PdfFont boldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+
+
+                    // Title
+                    Paragraph header = new Paragraph("Invoice")
+                        .SetTextAlignment(TextAlignment.CENTER)
+                        .SetFontSize(20)
+                        .SetFont(boldFont);
+                    doc.Add(header);
+
+                    // Customer details
+                    doc.Add(new Paragraph($"Customer: {invoicedOrder.Customer.Name}"));
+                    doc.Add(new Paragraph($"Date: {invoice.InvoiceDate:yyyy-MM-dd}"));
+                    doc.Add(new Paragraph(" ")); // empty space
+
+                    // Table
+                    Table table = new Table(2).UseAllAvailableWidth();
+                    table.AddHeaderCell("Item");
+                    table.AddHeaderCell("Price");
+                    decimal total = 0;
+                    foreach (var item in invoicedOrder.OrderProducts)
+                    {
+                        Product product = productManager.Get(item.ProductID);
+                        decimal price = product.Price * item.Quantity;
+                        string itemName = product.Name;
+                        table.AddCell(itemName);
+                        table.AddCell(price.ToString("C")); // format as currency
+                        total += price;
+                    }
+
+                    // Total row
+                    table.AddCell(new Cell(1, 1).Add(new Paragraph("Total")).SetFont(boldFont));
+                    table.AddCell(total.ToString("C"));
+
+                    doc.Add(table);
+
+                    doc.Close();
+                }
+            }
+            MessageBox.Show("Invoice PDF created successfully!");
+            
+        }
     }
 }
+
 
 

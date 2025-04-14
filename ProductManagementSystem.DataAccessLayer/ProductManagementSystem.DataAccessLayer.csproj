@@ -55,6 +55,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="DAL\CategoryDal.cs" />
     <Compile Include="DAL\CustomerDal.cs" />
+    <Compile Include="DAL\InvoiceDal.cs" />
     <Compile Include="DAL\OrderDal.cs" />
     <Compile Include="DAL\ProductDal.cs" />
     <Compile Include="GenericFunctions.cs" />
@@ -82,6 +83,10 @@
     <Compile Include="Migrations\202504131104160_mig-5.Designer.cs">
       <DependentUpon>202504131104160_mig-5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504140832173_mig-6.cs" />
+    <Compile Include="Migrations\202504140832173_mig-6.Designer.cs">
+      <DependentUpon>202504140832173_mig-6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504131104160_mig-5.resx">
       <DependentUpon>202504131104160_mig-5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504140832173_mig-6.resx">
+      <DependentUpon>202504140832173_mig-6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -22,5 +22,6 @@ namespace ProductManagementSystem.EntityLayer.Concrete
         [Required]
         public int CustomerID { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual Invoice Invoice { get; set; }
     }
 }
