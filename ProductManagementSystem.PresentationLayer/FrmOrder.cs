@@ -83,6 +83,47 @@ namespace ProductManagementSystem.PresentationLayer
                     add_columns_to_grid();
                 }
             }
+            else
+            {
+                Order o = null;
+                int.TryParse(txtSearch.Text, out int id);
+                o = orderManager.Get(id);
+                if (o == null)
+                {
+                    var values = orderManager.GetOrderByCustomer(txtSearch.Text);
+
+                    if (values.Count() == 0)
+                    {
+                        values = orderManager.GetOrderByStatus(txtSearch.Text);
+                    }
+                    if (values.Count() == 0)
+                    {
+                        MessageBox.Show("Order not found");
+                        return;
+                    }
+                    dataGridView1.Columns.Clear();
+                    dataGridView1.DataSource = values;
+                    dataGridView1.Visible = true;
+                    add_columns_to_grid();
+                    btnDone.Visible = true;
+                    return;
+                }
+                else {
+                    var retrievedOrder = new
+                    {
+                        OrderID = o.OrderId,
+                        Customer = o.Customer.Name + " " + o.Customer.Surname,
+                        Products = (o.OrderProducts.Count() > 0) ? orderManager.getProducts(o.OrderProducts) : "no products",// Works in memory
+                        Price = o.TotalPrice,
+                        Status = o.OrderStatus
+                    };
+                    var orderList = new List<object> { retrievedOrder };
+                    dataGridView1.Columns.Clear();
+                    dataGridView1.DataSource = orderList;
+                    dataGridView1.Visible = true;
+                    add_columns_to_grid();
+                }
+            }
 
         }
 
@@ -155,9 +196,18 @@ namespace ProductManagementSystem.PresentationLayer
                     // Get the quantity value
                     quantity = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value);
                     productId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ProductID"].Value);
-                    quantity++;
-                    productQuantities[productId] = quantity;
-                    dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value = quantity;
+                    Product product = productManager.Get(productId);
+                    if (product.Stock <= quantity)
+                    {
+                        MessageBox.Show("there is no more" + product.Name + "in stock");
+                    }
+                    else
+                    {
+
+                        quantity++;
+                        productQuantities[productId] = quantity;
+                        dataGridView1.Rows[e.RowIndex].Cells["Quantity"].Value = quantity;
+                    } 
                 }
                 else if (dataGridView1.Columns[e.ColumnIndex].Name == "btnRemoveProduct")
                 {
@@ -183,6 +233,7 @@ namespace ProductManagementSystem.PresentationLayer
                     dataGridView1.Columns.Clear(); // Clear old columns to prevent duplication
                     dataGridView1.DataSource = orderManager.GetOrderDetails(id);
                     btnBack.Visible = true;
+                    btnManage.Visible = true;
                 }
                     dataGridView1.Refresh();
             }
@@ -207,7 +258,7 @@ namespace ProductManagementSystem.PresentationLayer
 
                 int productId = Convert.ToInt32(row.Cells["ProductID"].Value);
                 Product product = productManager.Get(productId);
-
+               
 
                 order.OrderProducts.Add(new OrderProduct
                 {

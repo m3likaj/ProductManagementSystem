@@ -37,10 +37,7 @@ namespace ProductManagementSystem.BusinessLayer
             customerDal.Delete(customer);
 
         }
-        public List<IEnumerable<object>> GetOrderHistory(int id)
-        {
-            return customerDal.GetOrderHistory(id);
-        }
+        
         public Customer GetCustomerByPhone(string phone)
         {
             return customerDal.GetCustomerByPhone(phone);

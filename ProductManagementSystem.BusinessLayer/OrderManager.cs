@@ -28,5 +28,17 @@ namespace ProductManagementSystem.BusinessLayer
         {
             return orderDal.Get(id);
         }
+        public List<object> GetOrderByCustomer(string name)
+        {
+            return orderDal.GetOrderByCustomer(name);
+        }
+        public List<object> GetOrderByStatus(string status)
+        {
+            return orderDal.GetOrderByStatus(status);
+        }
+        public string getProducts(ICollection<OrderProduct> products)
+        {
+            return orderDal.getProducts(products);
+        }
     }
 }
